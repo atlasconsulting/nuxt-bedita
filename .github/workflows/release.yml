@@ -23,7 +23,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     steps:
 
-      - name: Checkout current revision
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Use Node.js 20.x
@@ -31,17 +31,17 @@ jobs:
         with:
           node-version: 20.x
 
-      - name: Yarn install
-        run: yarn install
+      - name: Install
+        run: npm install
 
       - name: Major release
         if: contains(github.event.pull_request.labels.*.name, 'release:major')
-        run: yarn release:major
+        run: npm run release:major
 
       - name: Minor release
         if: contains(github.event.pull_request.labels.*.name, 'release:minor')
-        run: yarn release:minor
+        run: npm run release:minor
 
       - name: Patch release
         if: contains(github.event.pull_request.labels.*.name, 'release:patch')
-        run: yarn release:patch
+        run: npm run release:patch
