@@ -22,7 +22,6 @@ jobs:
           echo "$GITHUB_CONTEXT"
 
   release-on-push:
-    if: github.event.pull_request.merged
     runs-on: 'ubuntu-latest'
     steps:
 
