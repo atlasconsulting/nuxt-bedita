@@ -1,0 +1,44 @@
+name: javascript
+
+on:
+  pull_request:
+    paths:
+      - '**/*.ts'
+      - '**/*.js'
+      - '**/*.scss'
+      - '.github/workflows/javascript.yml'
+      - 'package.json'
+      - 'yarn.lock'
+  push:
+    paths:
+      - '**/*.ts'
+      - '**/*.js'
+      - '**/*.scss'
+      - '.github/workflows/javascript.yml'
+      - 'package.json'
+      - 'yarn.lock'
+
+jobs:
+  javascript-build:
+    name: Check javascript build
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && !contains(github.event.commits[0].message, '[ci skip]')"
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x, 19.x]
+
+    steps:
+      - name: Checkout current revision
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Yarn install
+        run: yarn install
+
+      - name: Yarn lint
+        run: yarn lint
