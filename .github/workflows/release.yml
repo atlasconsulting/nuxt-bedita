@@ -1,0 +1,53 @@
+name: release
+
+on:
+  pull_request:
+    types: [closed]
+  # push:
+  #   branches: [main]
+  push:
+    paths:
+      - '.github/workflows/release.yml'
+
+jobs:
+
+  debug:
+    if: github.event.pull_request.merged
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+
+  release-on-push:
+    if: github.event.pull_request.merged
+    runs-on: 'ubuntu-latest'
+    steps:
+
+      - name: Checkout current revision
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Yarn install
+        run: yarn install
+
+      - name: See if major release
+        if: contains(github.event.pull_request.labels.*.name, 'release:major')
+        run: |
+          echo "create major release with yarn..."
+
+      - name: See if minor release
+        if: contains(github.event.pull_request.labels.*.name, 'release:minor')
+        run: |
+          echo "create minor release with yarn..."
+
+      - name: See if patch release
+        if: contains(github.event.pull_request.labels.*.name, 'release:patch')
+        run: |
+          echo "create patch release with yarn..."
