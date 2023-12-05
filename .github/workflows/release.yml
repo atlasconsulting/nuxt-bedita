@@ -6,12 +6,7 @@ on:
   push:
     branches: [main]
 
-env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
 jobs:
-
   debug:
     if: github.event.pull_request.merged
     runs-on: 'ubuntu-latest'
@@ -21,7 +16,6 @@ jobs:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: |
           echo "$GITHUB_CONTEXT"
-
   release-on-push:
     if: github.event.pull_request.merged
     runs-on: 'ubuntu-latest'
@@ -41,11 +35,20 @@ jobs:
       - name: Major release
         if: contains(github.event.pull_request.labels.*.name, 'release:major')
         run: npm run release:major
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Minor release
         if: contains(github.event.pull_request.labels.*.name, 'release:minor')
         run: npm run release:minor
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Patch release
         if: contains(github.event.pull_request.labels.*.name, 'release:patch')
         run: npm run release:patch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
