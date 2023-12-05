@@ -34,17 +34,14 @@ jobs:
       - name: Yarn install
         run: yarn install
 
-      - name: See if major release
+      - name: Major release
         if: contains(github.event.pull_request.labels.*.name, 'release:major')
-        run: |
-          echo "create major release with yarn..."
+        run: yarn release:major
 
-      - name: See if minor release
+      - name: Minor release
         if: contains(github.event.pull_request.labels.*.name, 'release:minor')
-        run: |
-          echo "create minor release with yarn..."
+        run: yarn release:minor
 
-      - name: See if patch release
+      - name: Patch release
         if: contains(github.event.pull_request.labels.*.name, 'release:patch')
-        run: |
-          echo "create patch release with yarn..."
+        run: yarn release:patch
