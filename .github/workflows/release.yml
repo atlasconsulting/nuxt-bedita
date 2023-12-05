@@ -3,11 +3,8 @@ name: release
 on:
   pull_request:
     types: [closed]
-  # push:
-  #   branches: [main]
   push:
-    paths:
-      - '.github/workflows/release.yml'
+    branches: [main]
 
 jobs:
 
@@ -22,6 +19,7 @@ jobs:
           echo "$GITHUB_CONTEXT"
 
   release-on-push:
+    if: github.event.pull_request.merged
     runs-on: 'ubuntu-latest'
     steps:
 
