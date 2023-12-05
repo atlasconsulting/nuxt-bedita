@@ -2,7 +2,7 @@
   "name": "@atlasconsulting/nuxt-bedita",
   "version": "0.0.1",
   "description": "Nuxt module for BEdita API",
-  "repository": "your-org/@atlasconsulting/nuxt-bedita",
+  "repository": "@atlasconsulting/nuxt-bedita",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@atlasconsulting/bedita-sdk": "^3.1.1",
-    "@nuxt/kit": "^3.8.1",
+    "@nuxt/kit": "^3.8.2",
     "defu": "^6.1.3",
     "h3": "^1.9.0",
     "vue-recaptcha-v3": "^2.0.1"
@@ -43,7 +43,7 @@
     "@types/node": "^20.8.10",
     "changelogen": "^0.5.5",
     "eslint": "^8.53.0",
-    "nuxt": "^3.8.1",
+    "nuxt": "^3.8.2",
     "vitest": "^0.33.0"
   }
 }
