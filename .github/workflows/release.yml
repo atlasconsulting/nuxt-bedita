@@ -32,6 +32,9 @@ jobs:
       - name: Install
         run: npm install
 
+      - name: Prepare
+        run: npm run dev:prepare
+
       - name: Major release
         if: contains(github.event.pull_request.labels.*.name, 'release:major')
         run: npm run release:major
