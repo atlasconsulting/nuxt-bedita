@@ -1,0 +1,40 @@
+name: javascript
+
+on:
+  pull_request:
+    paths:
+      - '**/*.ts'
+      - '.github/workflows/javascript.yml'
+      - 'package.json'
+      - 'package-lock.json'
+  push:
+    paths:
+      - '**/*.ts'
+      - '.github/workflows/javascript.yml'
+      - 'package.json'
+      - 'package-lock.json'
+
+jobs:
+  javascript-build:
+    name: Check javascript build
+    if: "!contains(github.event.commits[0].message, '[skip ci]') && !contains(github.event.commits[0].message, '[ci skip]')"
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install
+        run: npm install
+
+      - name: Lint
+        run: npm run lint

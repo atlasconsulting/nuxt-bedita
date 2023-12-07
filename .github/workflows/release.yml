@@ -1,0 +1,54 @@
+name: release
+
+on:
+  pull_request:
+    types: [closed]
+  push:
+    branches: [main]
+
+jobs:
+  debug:
+    if: github.event.pull_request.merged
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+  release-on-push:
+    if: github.event.pull_request.merged
+    runs-on: 'ubuntu-latest'
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 20.x
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+
+      - name: Install
+        run: npm install
+
+      - name: Major release
+        if: contains(github.event.pull_request.labels.*.name, 'release:major')
+        run: npm run release:major
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Minor release
+        if: contains(github.event.pull_request.labels.*.name, 'release:minor')
+        run: npm run release:minor
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Patch release
+        if: contains(github.event.pull_request.labels.*.name, 'release:patch')
+        run: npm run release:patch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
