@@ -3,6 +3,7 @@ import { filterUserDataToStore } from '../../../../utils/user-data-store';
 import { defineEventHandler, readBody, createError } from 'h3';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaClient, handleBeditaApiError } from '../../../utils/bedita-client';
+import type { UserAuth } from '../../../../types';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -23,7 +24,7 @@ export default defineEventHandler(async (event) => {
 
     await client.getStorageService().set('user', filterUserDataToStore(response?.formattedData));
 
-    return response?.formattedData || {};
+    return response?.formattedData as UserAuth;
   } catch (error) {
     return handleBeditaApiError(event, error);
   }

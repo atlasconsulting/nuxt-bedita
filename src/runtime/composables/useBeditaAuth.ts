@@ -1,17 +1,19 @@
 import { useReCaptcha, type IReCaptchaComposition } from 'vue-recaptcha-v3';
 import { useUserState } from '../states/user';
+import { computed, type ComputedRef } from '#imports';
+import type { UserAuth } from '../types';
 
 export const useBeditaAuth = () => {
   const user = useUserState();
 
-  const isLogged = computed<boolean>(() => user.value !== null);
+  const isLogged: ComputedRef<boolean> = computed<boolean>(() => user.value !== null);
 
   const { executeRecaptcha, recaptchaLoaded } = useReCaptcha() as IReCaptchaComposition;
 
   const login = async (username: string, password: string) => {
     await recaptchaLoaded();
     const recaptcha_token = await executeRecaptcha('login');
-    const data = await $fetch('/api/bedita/auth/login', {
+    const data = await $fetch<UserAuth>('/api/bedita/auth/login', {
       method: 'POST',
       body: {
         username,
@@ -34,6 +36,6 @@ export const useBeditaAuth = () => {
     user,
     isLogged,
     login,
-    logout
-  }
+    logout,
+  };
 }
