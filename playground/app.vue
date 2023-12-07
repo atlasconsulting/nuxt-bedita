@@ -26,7 +26,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { user, isLogged, login, logout } = useBeditaAuth();
 
 const username = ref('');

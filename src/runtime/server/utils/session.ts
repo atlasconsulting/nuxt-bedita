@@ -1,4 +1,5 @@
 import type { SessionConfig } from 'h3';
+import { useRuntimeConfig } from '#imports';
 
 export const getSessionConfig = (): SessionConfig => {
     const config = useRuntimeConfig();

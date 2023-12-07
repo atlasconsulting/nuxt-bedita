@@ -4,7 +4,7 @@ import {
   addServerHandler,
   addImportsDir,
   createResolver,
-  addServerImportsDir,
+  addServerImports,
   addRouteMiddleware,
   logger,
 } from '@nuxt/kit';
@@ -48,7 +48,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
 
   setup (options, nuxt) {
-    logger.info('Setting up bedita-nuxt...');
+    logger.info('Setting up nuxt-bedita...');
 
     const runtimeConfig = nuxt.options.runtimeConfig
     runtimeConfig.bedita = defu(runtimeConfig.bedita || {}, {
@@ -67,23 +67,40 @@ export default defineNuxtModule<ModuleOptions>({
     nuxt.options.build.transpile.push(resolver.resolve('./runtime'));
 
     // Server utils
-    addServerImportsDir(resolver.resolve('./runtime/server/utils'));
+    // addServerImportsDir(resolver.resolve('./runtime/server/utils'));
+    addServerImports([
+      {
+        from: resolver.resolve('./runtime/server/utils/bedita-client'),
+        name: 'beditaClient',
+      },
+      {
+        from: resolver.resolve('./runtime/server/utils/bedita-client'),
+        name: 'handleBeditaApiError',
+      },
+      {
+        from: resolver.resolve('./runtime/server/utils/recaptcha'),
+        name: 'recaptchaVerifyToken',
+      },
+      {
+        from: resolver.resolve('./runtime/server/utils/session'),
+        name: 'getSessionConfig',
+      },
+    ]);
 
     // Server API
-    const baseApiPath = './runtime/server/api/bedita';
     addServerHandler({
       route: '/api/bedita/auth/login',
-      handler: resolver.resolve(`${baseApiPath}/auth/login.post.ts`),
+      handler: resolver.resolve('./runtime/server/api/bedita/auth/login.post'),
     });
     addServerHandler({
       route: '/api/bedita/auth/logout',
-      handler: resolver.resolve(`${baseApiPath}/auth/logout.get.ts`),
+      handler: resolver.resolve('./runtime/server/api/bedita/auth/logout.get'),
     });
 
-    // middlewares
+    // // middlewares
     addRouteMiddleware({
       name: 'beditaAuth',
-      path: resolver.resolve('./runtime/middleware/auth.ts'),
+      path: resolver.resolve('./runtime/middleware/auth'),
       global: true,
     });
 
@@ -93,5 +110,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     // plugins
     addPlugin(resolver.resolve('./runtime/plugins/recaptcha'));
+
+    logger.success('nuxt-bedita ready');
   }
-})
+});
