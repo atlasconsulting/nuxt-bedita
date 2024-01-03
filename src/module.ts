@@ -1,6 +1,5 @@
 import {
   defineNuxtModule,
-  addPlugin,
   addServerHandler,
   addImportsDir,
   createResolver,
@@ -16,8 +15,8 @@ export interface ModuleOptions {
   apiKey: string,
   recaptcha: {
     enabled: boolean,
-    key?: string,
-    secret?: string,
+    siteKey?: string,
+    secretKey?: string,
   },
   session: {
     name: string,
@@ -54,11 +53,11 @@ export default defineNuxtModule<ModuleOptions>({
     runtimeConfig.bedita = defu(runtimeConfig.bedita || {}, {
       apiBaseUrl: options.apiBaseUrl,
       apiKey: options.apiKey,
-      recaptchaSecret: options.recaptcha.secret,
+      recaptchaSecretKey: options.recaptcha.secretKey,
       session: options.session,
     });
     runtimeConfig.public = defu(runtimeConfig.public, {
-      recaptchaKey: options.recaptcha.key,
+      recaptchaSiteKey: options.recaptcha.siteKey,
     });
 
     const resolver = createResolver(import.meta.url);
@@ -107,9 +106,6 @@ export default defineNuxtModule<ModuleOptions>({
     // composables and client utils
     addImportsDir(resolver.resolve('./runtime/utils'));
     addImportsDir(resolver.resolve('./runtime/composables'));
-
-    // plugins
-    addPlugin(resolver.resolve('./runtime/plugins/recaptcha'));
 
     logger.success('nuxt-bedita ready');
   }

@@ -26,3 +26,6 @@ export interface ApiResponseBodyList extends ApiResponseBodyOk {
     },
 }
 
+export enum RecaptchaActions {
+  Login = 'login',
+}

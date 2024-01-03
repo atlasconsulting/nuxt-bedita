@@ -3,12 +3,12 @@ import { filterUserDataToStore } from '../../../../utils/user-data-store';
 import { defineEventHandler, readBody, createError } from 'h3';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaClient, handleBeditaApiError } from '../../../utils/bedita-client';
-import type { UserAuth } from '../../../../types';
+import { RecaptchaActions, type UserAuth } from '../../../../types';
 
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const recaptchaVerify =  await recaptchaVerifyToken(body?.recaptcha_token);
+    const recaptchaVerify =  await recaptchaVerifyToken(body?.recaptcha_token, RecaptchaActions.Login);
     if (recaptchaVerify === false) {
       throw createError({
           statusCode: 400,
