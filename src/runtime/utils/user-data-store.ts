@@ -1,4 +1,3 @@
-
 import type { UserAuth, UserDataStore } from "../types";
 
 export const filterUserDataToStore = (data: UserAuth): UserDataStore => ({

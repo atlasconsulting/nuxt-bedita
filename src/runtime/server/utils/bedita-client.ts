@@ -1,6 +1,6 @@
 import { BEditaApiClient, MapIncludedInterceptor, type ApiResponseBodyError } from '@atlasconsulting/bedita-sdk';
 import { AxiosError, isAxiosError } from 'axios';
-import type { H3Event } from 'h3';
+import { type H3Event, setResponseStatus, useSession } from 'h3';
 import SessionStorageAdapter from '../services/adapters/session-storage-adapter';
 import { getSessionConfig } from './session';
 import { useRuntimeConfig } from '#imports';
