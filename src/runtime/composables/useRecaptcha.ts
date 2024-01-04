@@ -6,6 +6,7 @@ declare global {
     }
 }
 
+// Ensure that `grecaptcha` is available
 const isLoaded = (resolve: Function) => {
   if (window.grecaptcha === undefined) {
     setTimeout(() => isLoaded(resolve), 25);
@@ -48,9 +49,7 @@ export const useRecaptcha = () => {
             window.grecaptcha.ready(() => {
                 window.grecaptcha.execute(runtimeConfig.public.recaptchaSiteKey, { action })
                     .catch(() => reject('Recaptcha failed to load'))
-                    .then((token: string) => {
-                        return resolve(token);
-                    });
+                    .then((token: string) => resolve(token));
             });
         });
     };
