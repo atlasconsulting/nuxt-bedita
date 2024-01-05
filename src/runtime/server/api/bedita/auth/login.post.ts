@@ -4,7 +4,7 @@ import { defineEventHandler, readBody, createError } from 'h3';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaClient, handleBeditaApiError } from '../../../utils/bedita-client';
 import { type UserAuth } from '../../../../types';
-import { RecaptchaActions } from '../../../../utils/recaptcha-actions';
+import { RecaptchaActions } from '../../../../utils/recaptcha-helpers';
 
 export default defineEventHandler(async (event) => {
   try {
