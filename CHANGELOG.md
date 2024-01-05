@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v0.1.0
+
+
+### 🚀 Enhancements
+
+- Add signup and signup activation endpoints and related composable ([#7](https://github.com/atlasconsulting/nuxt-bedita/pull/7))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.0.2
 
 
