@@ -1,17 +1,9 @@
 import { useRuntimeConfig } from '#imports';
 import { ofetch } from 'ofetch';
 import { isRecaptchaEnabled } from '../../utils/recaptcha-helpers';
+import type { RecaptchaResponse } from '../../types';
 
-type RecaptchaResponse = {
-  success: boolean;
-  score: number;
-  action: string;
-  challenge_ts: string;
-  hostname: string;
-  error_codes?: string[];
-};
-
-export const recaptchaVerifyToken = async (token: string, action: string): Promise<boolean> => {
+export const recaptchaVerifyToken = async (token: string, action: string, throwError = true): Promise<boolean> => {
   if (!isRecaptchaEnabled()) {
     return true;
   }
@@ -23,5 +15,13 @@ export const recaptchaVerifyToken = async (token: string, action: string): Promi
     body: `secret=${config.bedita.recaptchaSecretKey}&response=${token}`,
   });
 
-  return data.action === action && data.success && data.score > 0.5;
+  const test = data.action === action && data.success && (data.score || 0) > 0.5;
+  if (!test && throwError) {
+    throw createError({
+      statusCode: 400,
+      message: `Recaptcha token not valid. ${(data?.['error-codes'] || []).join(', ')}`,
+    });
+  }
+
+  return test;
 };
