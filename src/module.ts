@@ -103,10 +103,15 @@ export default defineNuxtModule<ModuleOptions>({
     });
     logger.info('API endpoint /api/bedita/auth/logout added.');
     addServerHandler({
-      route: '/api/bedita/auth/signup',
+      route: '/api/bedita/signup',
       handler: resolver.resolve('./runtime/server/api/bedita/signup/signup.post'),
     });
-    logger.info('API endpoint /api/bedita/auth/signup added.');
+    logger.info('API endpoint /api/bedita/signup added.');
+    addServerHandler({
+      route: '/api/bedita/signup/activation',
+      handler: resolver.resolve('./runtime/server/api/bedita/signup/activation.post'),
+    });
+    logger.info('API endpoint /api/bedita/signup/activation added.');
 
     // middlewares
     addRouteMiddleware({
