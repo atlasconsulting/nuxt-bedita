@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-const { signupActivation } = useBeditaAuth();
+const { signupActivation } = useBeditaSignup();
 
 const { pending: loading, error } = await signupActivation();
 </script>

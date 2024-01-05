@@ -52,7 +52,8 @@
 </template>
 
 <script lang="ts" setup>
-const { user, isLogged, logout, signup } = useBeditaAuth();
+const { user, isLogged, logout } = useBeditaAuth();
+const { signup } = useBeditaSignup();
 
 const username = ref('');
 const password = ref('');
