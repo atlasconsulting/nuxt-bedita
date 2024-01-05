@@ -7,6 +7,26 @@
 ### 🚀 Enhancements
 
 - Add signup and signup activation endpoints and related composable ([#7](https://github.com/atlasconsulting/nuxt-bedita/pull/7))
+- Add type template to having access to types in nuxt app ([5f3ec63](https://github.com/atlasconsulting/nuxt-bedita/commit/5f3ec63))
+- Allow to disable recaptcha ([#6](https://github.com/atlasconsulting/nuxt-bedita/pull/6))
+
+### 🩹 Fixes
+
+- **build:** Transpile tslib ([1455168](https://github.com/atlasconsulting/nuxt-bedita/commit/1455168))
+
+### 💅 Refactors
+
+- ⚠️  Replace vue-recaptcha-v3 ([#5](https://github.com/atlasconsulting/nuxt-bedita/pull/5))
+- Remove enum and use "as const" ([d3b8758](https://github.com/atlasconsulting/nuxt-bedita/commit/d3b8758))
+- By default verifyRecaptcha throws error ([5a07361](https://github.com/atlasconsulting/nuxt-bedita/commit/5a07361))
+
+### 🏡 Chore
+
+- Add console log using useRecaptcha composable when recaptcha is disabled ([e594ce7](https://github.com/atlasconsulting/nuxt-bedita/commit/e594ce7))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Replace vue-recaptcha-v3 ([#5](https://github.com/atlasconsulting/nuxt-bedita/pull/5))
 
 ### ❤️ Contributors
 
