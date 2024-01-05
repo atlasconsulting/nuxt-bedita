@@ -63,7 +63,10 @@ export default defineNuxtModule<ModuleOptions>({
     const resolver = createResolver(import.meta.url);
 
     // Transpile runtime
-    nuxt.options.build.transpile.push(resolver.resolve('./runtime'));
+    nuxt.options.build.transpile.push(
+      resolver.resolve('./runtime'),
+      resolver.resolve('../node_modules/tslib'), // transpile tslib used by @atlasconsulting/bedita-sdk
+    );
 
     // Server utils
     // addServerImportsDir(resolver.resolve('./runtime/server/utils'));
