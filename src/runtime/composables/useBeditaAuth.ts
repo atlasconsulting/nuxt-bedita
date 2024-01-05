@@ -26,12 +26,12 @@ export const useBeditaAuth = () => {
     user.value = filterUserDataToStore(data);
 
     return data;
-  }
+  };
 
   const logout = async () => {
     await $fetch('/api/bedita/auth/logout');
     user.value = null;
-  }
+  };
 
   return {
     user,

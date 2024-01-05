@@ -34,3 +34,11 @@ export type RecaptchaResponse = {
   hostname?: string;
   'error-codes'?: string[];
 };
+
+export type SignupBeditaBody = {
+  username: string,
+  password: string,
+  email: string,
+  name?: string,
+  surname?: string,
+} & Record<string, any>

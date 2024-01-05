@@ -96,12 +96,24 @@ export default defineNuxtModule<ModuleOptions>({
       route: '/api/bedita/auth/login',
       handler: resolver.resolve('./runtime/server/api/bedita/auth/login.post'),
     });
+    logger.info('API endpoint /api/bedita/auth/login added.');
     addServerHandler({
       route: '/api/bedita/auth/logout',
-      handler: resolver.resolve('./runtime/server/api/bedita/auth/logout.get'),
+      handler: resolver.resolve('./runtime/server/api/bedita/auth/logout'),
     });
+    logger.info('API endpoint /api/bedita/auth/logout added.');
+    addServerHandler({
+      route: '/api/bedita/signup',
+      handler: resolver.resolve('./runtime/server/api/bedita/signup/signup.post'),
+    });
+    logger.info('API endpoint /api/bedita/signup added.');
+    addServerHandler({
+      route: '/api/bedita/signup/activation',
+      handler: resolver.resolve('./runtime/server/api/bedita/signup/activation.post'),
+    });
+    logger.info('API endpoint /api/bedita/signup/activation added.');
 
-    // // middlewares
+    // middlewares
     addRouteMiddleware({
       name: 'beditaAuth',
       path: resolver.resolve('./runtime/middleware/auth'),
@@ -117,7 +129,7 @@ export default defineNuxtModule<ModuleOptions>({
       getContents: () => [
         `declare module '@atlasconsulting/nuxt-bedita' {`,
         `  import('${resolver.resolve('./runtime/types')}')`,
-        `  export type { UserAuth, UserDataStore, ApiResponseBodyResource, ApiResponseBodyList } from '${resolver.resolve('./runtime/types')}'`,
+        `  export type { UserAuth, UserDataStore, ApiResponseBodyResource, ApiResponseBodyList, SignupBeditaBody } from '${resolver.resolve('./runtime/types')}'`,
         `}`,
       ].join('\n'),
     });
