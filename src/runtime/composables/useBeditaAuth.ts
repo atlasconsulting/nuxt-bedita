@@ -1,7 +1,7 @@
 import { useRecaptcha } from '../composables/useRecaptcha';
 import { useUserState } from '../states/user';
 import { computed, type ComputedRef } from '#imports';
-import type { UserAuth } from '../types';
+import type { SignupBeditaBody, UserAuth } from '../types';
 import { filterUserDataToStore } from '../utils/user-data-store';
 import { RecaptchaActions } from '../utils/recaptcha-helpers';
 
@@ -33,10 +33,22 @@ export const useBeditaAuth = () => {
     user.value = null;
   }
 
+  const signup = async (data: SignupBeditaBody) => {
+    const recaptcha_token = await executeRecaptcha(RecaptchaActions.SIGNUP);
+    return await $fetch('/api/bedita/auth/signup', {
+      method: 'POST',
+      body: {
+        ...data,
+        recaptcha_token
+      },
+    });
+  }
+
   return {
     user,
     isLogged,
     login,
     logout,
+    signup,
   };
 }
