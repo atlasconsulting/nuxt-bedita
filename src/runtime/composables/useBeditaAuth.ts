@@ -3,7 +3,7 @@ import { useUserState } from '../states/user';
 import { computed, type ComputedRef } from '#imports';
 import type { UserAuth } from '../types';
 import { filterUserDataToStore } from '../utils/user-data-store';
-import { RecaptchaActions } from '../utils/recaptcha-actions';
+import { RecaptchaActions } from '../utils/recaptcha-helpers';
 
 export const useBeditaAuth = () => {
   const user = useUserState();

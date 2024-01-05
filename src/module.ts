@@ -58,6 +58,7 @@ export default defineNuxtModule<ModuleOptions>({
       session: options.session,
     });
     runtimeConfig.public = defu(runtimeConfig.public, {
+      recaptchaEnabled: options.recaptcha.enabled,
       recaptchaSiteKey: options.recaptcha.siteKey,
     });
 

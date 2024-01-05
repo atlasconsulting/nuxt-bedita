@@ -1,5 +1,6 @@
 import { useRuntimeConfig } from '#imports';
 import { ofetch } from 'ofetch';
+import { isRecaptchaEnabled } from '../../utils/recaptcha-helpers';
 
 type RecaptchaResponse = {
   success: boolean;
@@ -11,13 +12,16 @@ type RecaptchaResponse = {
 };
 
 export const recaptchaVerifyToken = async (token: string, action: string): Promise<boolean> => {
-    const config = useRuntimeConfig();
+  if (!isRecaptchaEnabled()) {
+    return true;
+  }
 
-    const data: RecaptchaResponse = await ofetch('https://www.google.com/recaptcha/api/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `secret=${config.bedita.recaptchaSecretKey}&response=${token}`,
-    });
+  const config = useRuntimeConfig();
+  const data: RecaptchaResponse = await ofetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `secret=${config.bedita.recaptchaSecretKey}&response=${token}`,
+  });
 
-    return data.action === action && data.success && data.score > 0.5;
+  return data.action === action && data.success && data.score > 0.5;
 };
