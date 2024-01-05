@@ -25,7 +25,3 @@ export interface ApiResponseBodyList extends ApiResponseBodyOk {
         data: JsonApiResourceObject[] | [],
     },
 }
-
-export enum RecaptchaActions {
-  Login = 'login',
-}
