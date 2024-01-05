@@ -6,6 +6,7 @@ import {
   addServerImports,
   addRouteMiddleware,
   logger,
+  addTypeTemplate,
 } from '@nuxt/kit';
 import { defu } from 'defu';
 
@@ -109,6 +110,16 @@ export default defineNuxtModule<ModuleOptions>({
     // composables and client utils
     addImportsDir(resolver.resolve('./runtime/utils'));
     addImportsDir(resolver.resolve('./runtime/composables'));
+
+    addTypeTemplate({
+      filename: 'types/nuxt-bedita.d.ts',
+      getContents: () => [
+        `declare module '@atlasconsulting/nuxt-bedita' {`,
+        `  import('${resolver.resolve('./runtime/types')}')`,
+        `  export type { UserAuth, UserDataStore, ApiResponseBodyResource, ApiResponseBodyList } from '${resolver.resolve('./runtime/types')}'`,
+        `}`,
+      ].join('\n'),
+    });
 
     logger.success('nuxt-bedita ready');
   }
