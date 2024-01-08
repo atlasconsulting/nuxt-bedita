@@ -17,13 +17,13 @@ export const useBeditaSignup = () => {
     });
   };
 
-  const signupActivation = async (uuid?: string) => {
+  const signupActivation = async (uuid?: string, server?: boolean) => {
     const route = useRoute();
 
-    return await useFetch('/api/bedita/signup/activation',{
+    return await useFetch('/api/bedita/signup/activation', {
       method:'POST',
       body: { uuid: uuid || route.query?.uuid },
-      server: false,
+      server,
     });
   };
 
