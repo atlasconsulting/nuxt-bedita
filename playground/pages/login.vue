@@ -4,12 +4,19 @@
     <div v-if="!isLogged">
       <form>
         <div>
-          <input v-model="username" type="text">
+          <label>
+            <div>Username</div>
+            <input v-model="username" type="text">
+          </label>
         </div>
         <div>
-          <input v-model="password" type="password">
+          <label>
+            <div>Password</div>
+            <input v-model="password" type="password">
+          </label>
         </div>
-        <div>
+        <div style="margin-top: 10px;">
+          <RecaptchaBadge v-if="showCustomBadge" />
           <button :disabled="isLoading" @click.prevent="authenticate()">Login</button>
         </div>
         <p v-if="error" style="color: red;">An error occured. Please, try again.</p>
@@ -32,6 +39,7 @@ const username = ref('');
 const password = ref('');
 const error = ref(false);
 const isLoading = ref(false);
+const showCustomBadge = useRuntimeConfig().public.recaptcha.hideBadge;
 
 const authenticate = async () => {
   error.value = false;
