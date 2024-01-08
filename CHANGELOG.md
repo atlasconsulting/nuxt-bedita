@@ -7,6 +7,7 @@
 ### 🚀 Enhancements
 
 - Customize recaptcha options ([#8](https://github.com/atlasconsulting/nuxt-bedita/pull/8))
+- Add server option in signupActivation() ([f99a2ed](https://github.com/atlasconsulting/nuxt-bedita/commit/f99a2ed))
 
 ### ❤️ Contributors
 
