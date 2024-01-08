@@ -1,6 +1,17 @@
 # Changelog
 
 
+## v0.1.1
+
+
+### 🚀 Enhancements
+
+- Customize recaptcha options ([#8](https://github.com/atlasconsulting/nuxt-bedita/pull/8))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.1.0
 
 
