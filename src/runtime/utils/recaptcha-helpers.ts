@@ -6,5 +6,5 @@ export const RecaptchaActions = {
 } as const;
 
 export const isRecaptchaEnabled = () => {
-  return !!useRuntimeConfig().public.recaptchaEnabled === true;
+  return !!useRuntimeConfig().public.recaptcha.enabled === true;
 }

@@ -5,8 +5,10 @@ export default defineNuxtConfig({
     apiKey: '',
     recaptcha: {
       enabled: true,
-      key: '',
-      secret: '',
+      siteKey: '',
+      secretKey: '',
+      hideBadge: false,
+      useRecaptchaNet: true,
     },
     session: {
       name: '',

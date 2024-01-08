@@ -33,7 +33,8 @@
             <input v-model="password" type="password" required>
           </label>
         </div>
-        <div>
+        <div style="margin-top: 10px;">
+          <RecaptchaBadge v-if="showCustomBadge" />
           <button :disabled="isLoading" @click.prevent="submit()">Signup</button>
         </div>
         <p v-if="error" style="color: red;">An error occured. Please, try again.</p>
@@ -63,6 +64,7 @@ const email = ref('');
 const error = ref(false);
 const done = ref(false);
 const isLoading = ref(false);
+const showCustomBadge = useRuntimeConfig().public.recaptcha.hideBadge;
 
 const submit = async () => {
   error.value = false;
