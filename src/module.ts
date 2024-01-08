@@ -18,6 +18,8 @@ export interface ModuleOptions {
     enabled: boolean,
     siteKey?: string,
     secretKey?: string,
+    hideBadge?: boolean,
+    useRecaptchaNet?: boolean,
   },
   session: {
     name: string,
@@ -40,6 +42,8 @@ export default defineNuxtModule<ModuleOptions>({
     apiKey: '',
     recaptcha: {
       enabled: false,
+      hideBadge: false,
+      useRecaptchaNet: false,
     },
     session: {
       name: 'bedita',
@@ -57,9 +61,13 @@ export default defineNuxtModule<ModuleOptions>({
       recaptchaSecretKey: options.recaptcha.secretKey,
       session: options.session,
     });
-    runtimeConfig.public = defu(runtimeConfig.public, {
-      recaptchaEnabled: options.recaptcha.enabled,
-      recaptchaSiteKey: options.recaptcha.siteKey,
+    runtimeConfig.public = defu(runtimeConfig.public || {}, {
+      recaptcha: {
+        enabled: options.recaptcha.enabled,
+        siteKey: options.recaptcha.siteKey,
+        hideBadge: options.recaptcha.hideBadge,
+        useRecaptchaNet: options.recaptcha.useRecaptchaNet,
+      }
     });
 
     const resolver = createResolver(import.meta.url);

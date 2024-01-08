@@ -30,18 +30,16 @@ export const useRecaptcha = () => {
   const runtimeConfig = useRuntimeConfig();
 
   if (!recaptchaScriptAdded.value) {
+    const recaptchaBaseUrl = runtimeConfig.public.recaptcha.useRecaptchaNet ? 'https://www.recaptcha.net' : 'https://www.google.com';
+    const style = runtimeConfig.public.recaptcha.hideBadge ? [ { innerHTML: '.grecaptcha-badge { visibility: hidden; }' } ] : [];
     useHead({
       script: [
         {
-          src: `https://www.recaptcha.net/recaptcha/api.js?render=${runtimeConfig.public.recaptchaSiteKey}`,
+          src: `${recaptchaBaseUrl}/recaptcha/api.js?render=${runtimeConfig.public.recaptcha.siteKey}`,
           defer: true,
         },
       ],
-      style: [
-        {
-          innerHTML: '.grecaptcha-badge { visibility: hidden; }',
-        },
-      ],
+      style,
     });
 
     recaptchaScriptAdded.value = true;
@@ -54,7 +52,7 @@ export const useRecaptcha = () => {
 
     return new Promise((resolve, reject) => {
       window.grecaptcha.ready(() => {
-        window.grecaptcha.execute(runtimeConfig.public.recaptchaSiteKey, { action })
+        window.grecaptcha.execute(runtimeConfig.public.recaptcha.siteKey, { action })
           .catch(() => reject('Recaptcha failed to load'))
           .then((token: string) => resolve(token));
       });
