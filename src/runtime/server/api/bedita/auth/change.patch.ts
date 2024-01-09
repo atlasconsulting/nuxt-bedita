@@ -2,9 +2,9 @@ import { defineEventHandler, readBody } from 'h3';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaClient, handleBeditaApiError } from '../../../utils/bedita-client';
 import { RecaptchaActions } from '../../../../utils/recaptcha-helpers';
-import { UserAuth } from '../../../../types';
+import type { UserAuth } from '../../../../types';
 import { filterUserDataToStore } from '../../../../utils/user-data-store';
-import { BEditaClientRequestConfig, FormatUserInterceptor } from '@atlasconsulting/bedita-sdk';
+import { type BEditaClientRequestConfig, FormatUserInterceptor } from '@atlasconsulting/bedita-sdk';
 
 export default defineEventHandler(async (event) => {
   try {
