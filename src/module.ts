@@ -21,6 +21,7 @@ export interface ModuleOptions {
     hideBadge?: boolean,
     useRecaptchaNet?: boolean,
   },
+  resetPasswordPath?: string,
   session: {
     name: string,
     secret: string,
@@ -45,6 +46,7 @@ export default defineNuxtModule<ModuleOptions>({
       hideBadge: false,
       useRecaptchaNet: false,
     },
+    resetPasswordPath: '/reset-password',
     session: {
       name: 'bedita',
       secret: '',
@@ -59,6 +61,7 @@ export default defineNuxtModule<ModuleOptions>({
       apiBaseUrl: options.apiBaseUrl,
       apiKey: options.apiKey,
       recaptchaSecretKey: options.recaptcha.secretKey,
+      resetPasswordPath: options.resetPasswordPath,
       session: options.session,
     });
     runtimeConfig.public = defu(runtimeConfig.public || {}, {
@@ -78,7 +81,11 @@ export default defineNuxtModule<ModuleOptions>({
       resolver.resolve('../node_modules/tslib'), // transpile tslib used by @atlasconsulting/bedita-sdk
     );
 
-    // Server utils
+    /*
+     ****************
+     * Server utils *
+     ****************
+     */
     // addServerImportsDir(resolver.resolve('./runtime/server/utils'));
     addServerImports([
       {
@@ -99,7 +106,12 @@ export default defineNuxtModule<ModuleOptions>({
       },
     ]);
 
-    // Server API
+    /*
+     **************
+     * Server API *
+     **************
+     */
+    // auth endpoints
     addServerHandler({
       route: '/api/bedita/auth/login',
       handler: resolver.resolve('./runtime/server/api/bedita/auth/login.post'),
@@ -111,6 +123,23 @@ export default defineNuxtModule<ModuleOptions>({
     });
     logger.info('API endpoint /api/bedita/auth/logout added.');
     addServerHandler({
+      route: '/api/bedita/auth/reset',
+      handler: resolver.resolve('./runtime/server/api/bedita/auth/reset.post'),
+    });
+    logger.info('API endpoint /api/bedita/auth/reset added.');
+    addServerHandler({
+      route: '/api/bedita/auth/change',
+      handler: resolver.resolve('./runtime/server/api/bedita/auth/change.patch'),
+    });
+    logger.info('API endpoint /api/bedita/auth/change added.');
+    addServerHandler({
+      route: '/api/bedita/auth/optout',
+      handler: resolver.resolve('./runtime/server/api/bedita/auth/optout.post'),
+    });
+    logger.info('API endpoint /api/bedita/auth/optout added.');
+
+    // signup endpoints
+    addServerHandler({
       route: '/api/bedita/signup',
       handler: resolver.resolve('./runtime/server/api/bedita/signup/signup.post'),
     });
@@ -121,17 +150,30 @@ export default defineNuxtModule<ModuleOptions>({
     });
     logger.info('API endpoint /api/bedita/signup/activation added.');
 
-    // middlewares
+    /*
+     **************
+     * Middlewares *
+     **************
+     */
     addRouteMiddleware({
       name: 'beditaAuth',
       path: resolver.resolve('./runtime/middleware/auth'),
       global: true,
     });
 
-    // composables and client utils
+    /*
+     ********************************
+     * Composables and client utils *
+     ********************************
+     */
     addImportsDir(resolver.resolve('./runtime/utils'));
     addImportsDir(resolver.resolve('./runtime/composables'));
 
+    /*
+     *****************
+     * Type template *
+     *****************
+     */
     addTypeTemplate({
       filename: 'types/nuxt-bedita.d.ts',
       getContents: () => [
