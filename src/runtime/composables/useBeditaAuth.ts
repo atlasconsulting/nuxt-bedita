@@ -43,7 +43,7 @@ export const useBeditaAuth = () => {
         recaptcha_token
       },
     });
-  }
+  };
 
   const changePassword = async (password: string, uuid?: string, login = false) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.CHANGE_PASSWORD);
@@ -64,7 +64,20 @@ export const useBeditaAuth = () => {
     }
 
     return data;
-  }
+  };
+
+  const optOut = async (username: string, password: string) => {
+    const recaptcha_token = await executeRecaptcha(RecaptchaActions.LOGIN);
+
+    return await $fetch<UserAuth>('/api/bedita/auth/optout', {
+      method: 'POST',
+      body: {
+        username,
+        password,
+        recaptcha_token
+      },
+    });
+  };
 
   return {
     user,
@@ -73,5 +86,6 @@ export const useBeditaAuth = () => {
     logout,
     resetPassword,
     changePassword,
+    optOut,
   };
 }
