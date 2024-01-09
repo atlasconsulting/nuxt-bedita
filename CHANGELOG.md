@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v0.1.2
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.1.1...v0.1.2)
+
+### 🚀 Enhancements
+
+- Add reset, change password endopints and optout endpoint ([#9](https://github.com/atlasconsulting/nuxt-bedita/pull/9))
+
+### 🏡 Chore
+
+- **release:** V0.1.1 ([f696428](https://github.com/atlasconsulting/nuxt-bedita/commit/f696428))
+- Update changelog ([a222f73](https://github.com/atlasconsulting/nuxt-bedita/commit/a222f73))
+
+### 🤖 CI
+
+- Fix git log deep history ([#10](https://github.com/atlasconsulting/nuxt-bedita/pull/10))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+- Batopa ([@batopa](http://github.com/batopa))
+
 ## v0.1.1
 
 
