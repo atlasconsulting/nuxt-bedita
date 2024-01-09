@@ -45,11 +45,11 @@ export const useBeditaAuth = () => {
     });
   };
 
-  const changePassword = async (password: string, uuid?: string, login = false) => {
+  const changePassword = async (password: string, login = false, uuid?: string) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.CHANGE_PASSWORD);
     const route = useRoute();
 
-    const data = await $fetch<UserAuth>('/api/bedita/auth/reset', {
+    const data = await $fetch<UserAuth>('/api/bedita/auth/change', {
       method: 'PATCH',
       body: {
         uuid: uuid || route.query?.uuid,
@@ -67,9 +67,9 @@ export const useBeditaAuth = () => {
   };
 
   const optOut = async (username: string, password: string) => {
-    const recaptcha_token = await executeRecaptcha(RecaptchaActions.LOGIN);
+    const recaptcha_token = await executeRecaptcha(RecaptchaActions.OPTOUT);
 
-    return await $fetch<UserAuth>('/api/bedita/auth/optout', {
+    return await $fetch('/api/bedita/auth/optout', {
       method: 'POST',
       body: {
         username,
