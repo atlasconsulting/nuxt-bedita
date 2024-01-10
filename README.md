@@ -17,7 +17,7 @@ Nuxt module for [BEdita API](https://github.com/bedita/bedita).
 - Nuxt 3 ready
 - Easy integration with [BEdita API](https://github.com/bedita/bedita)
 - expose API for login, logout, signup
-- Auto import composables `useBeditaAuth`
+- Auto import composables `useBeditaAuth`, `useBeditaSignup`, `useRecaptcha` (only [v3](https://developers.google.com/recaptcha/docs/v3) version is supported)
 - Auto import server utils
 
 ## Quick Setup
@@ -45,14 +45,19 @@ export default defineNuxtConfig({
   bedita: {
     apiBaseUrl: 'https://api-bedita.mydomain.com', // required
     apiKey: '<bedita-api-key>', // required
+    endpoints: ['auth', 'signup'], // API endpoints added to app
+    proxyEndpoints: [], // endpoints proxied to BEdita API as is
     recaptcha: {
       enabled: true, // default true
-      key: '<recaptcha-key>', // required if recaptcha is enabled
-      secret: '<recaptcha-secret>', // required if recaptcha is enabled
+      siteKey: '<recaptcha-site-key>', // required if recaptcha is enabled
+      secretKey: '<recaptcha-secret-key>', // required if recaptcha is enabled
+      hideBadge: false, // default false, hide Recaptcha badge (https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed)
+      useRecaptchaNet: true, // default true, allow to use the domain `recaptcha.net` instead of `google.com`
     },
+    resetPasswordPath: '/reset-password', // route path to page used for password reset. Sent via email to user in the forgotten password flow.
     session: {
       name: 'bedita', // session cookie name
-      secret: '<session-secret>', // secret used to seal cookie
+      secret: '<session-secret>', // required private key used to encrypt session
     }, 
   }
 })
