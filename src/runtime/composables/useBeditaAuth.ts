@@ -14,7 +14,7 @@ export const useBeditaAuth = () => {
 
   const login = async (username: string, password: string) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.LOGIN);
-    const data = await $fetch<UserAuth>('/api/bedita/auth/login', {
+    const data = await $fetch<UserAuth>('/api/bedita/auth', {
       method: 'POST',
       body: {
         username,
