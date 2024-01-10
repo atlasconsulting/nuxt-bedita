@@ -10,10 +10,19 @@ import {
 } from '@nuxt/kit';
 import { defu } from 'defu';
 
+type EndpointConf = 'auth' | 'signup';
+
+type ProxyEndpointConf = {
+  path: string,
+  methods: ('GET' | 'POST' | 'PATCH' | 'DELETE' | '*')[],
+};
+
 // Module options TypeScript interface definition
 export interface ModuleOptions {
   apiBaseUrl: string,
   apiKey: string,
+  endpoints?: EndpointConf[],
+  proxyEndpoints?: ProxyEndpointConf[],
   recaptcha: {
     enabled: boolean,
     siteKey?: string,
@@ -81,6 +90,9 @@ export default defineNuxtModule<ModuleOptions>({
       resolver.resolve('../node_modules/tslib'), // transpile tslib used by @atlasconsulting/bedita-sdk
     );
 
+    // default endpoints
+    const endpoints: EndpointConf[] = options?.endpoints || ['auth', 'signup'];
+
     /*
      ****************
      * Server utils *
@@ -111,44 +123,51 @@ export default defineNuxtModule<ModuleOptions>({
      * Server API *
      **************
      */
+    const endpointsEnabled = [];
     // auth endpoints
-    addServerHandler({
-      route: '/api/bedita/auth/login',
-      handler: resolver.resolve('./runtime/server/api/bedita/auth/login.post'),
-    });
-    logger.info('API endpoint /api/bedita/auth/login added.');
-    addServerHandler({
-      route: '/api/bedita/auth/logout',
-      handler: resolver.resolve('./runtime/server/api/bedita/auth/logout'),
-    });
-    logger.info('API endpoint /api/bedita/auth/logout added.');
-    addServerHandler({
-      route: '/api/bedita/auth/reset',
-      handler: resolver.resolve('./runtime/server/api/bedita/auth/reset.post'),
-    });
-    logger.info('API endpoint /api/bedita/auth/reset added.');
-    addServerHandler({
-      route: '/api/bedita/auth/change',
-      handler: resolver.resolve('./runtime/server/api/bedita/auth/change.patch'),
-    });
-    logger.info('API endpoint /api/bedita/auth/change added.');
-    addServerHandler({
-      route: '/api/bedita/auth/optout',
-      handler: resolver.resolve('./runtime/server/api/bedita/auth/optout.post'),
-    });
-    logger.info('API endpoint /api/bedita/auth/optout added.');
+    if (endpoints.includes('auth')) {
+      endpointsEnabled.push(
+        {
+          route: '/api/bedita/auth',
+          handler: resolver.resolve('./runtime/server/api/bedita/auth/login.post'),
+        },
+        {
+          route: '/api/bedita/auth/logout',
+          handler: resolver.resolve('./runtime/server/api/bedita/auth/logout'),
+        },
+        {
+          route: '/api/bedita/auth/reset',
+          handler: resolver.resolve('./runtime/server/api/bedita/auth/reset.post'),
+        },
+        {
+          route: '/api/bedita/auth/change',
+          handler: resolver.resolve('./runtime/server/api/bedita/auth/change.patch'),
+        },
+        {
+          route: '/api/bedita/auth/optout',
+          handler: resolver.resolve('./runtime/server/api/bedita/auth/optout.post'),
+        }
+      );
+    }
 
     // signup endpoints
-    addServerHandler({
-      route: '/api/bedita/signup',
-      handler: resolver.resolve('./runtime/server/api/bedita/signup/signup.post'),
+    if (endpoints.includes('signup')) {
+      endpointsEnabled.push(
+        {
+          route: '/api/bedita/signup',
+          handler: resolver.resolve('./runtime/server/api/bedita/signup/signup.post'),
+        },
+        {
+          route: '/api/bedita/signup/activation',
+          handler: resolver.resolve('./runtime/server/api/bedita/signup/activation.post'),
+        },
+      );
+    }
+
+    endpointsEnabled.forEach((endpoint) => {
+      addServerHandler(endpoint);
+      logger.info(`API endpoint ${endpoint.route} added.`);
     });
-    logger.info('API endpoint /api/bedita/signup added.');
-    addServerHandler({
-      route: '/api/bedita/signup/activation',
-      handler: resolver.resolve('./runtime/server/api/bedita/signup/activation.post'),
-    });
-    logger.info('API endpoint /api/bedita/signup/activation added.');
 
     /*
      **************
