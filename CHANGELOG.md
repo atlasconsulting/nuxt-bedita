@@ -1,6 +1,28 @@
 # Changelog
 
 
+## v0.1.3
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.1.2...v0.1.3)
+
+### 🚀 Enhancements
+
+- Allow to enable/disable auth and signup endpoints ([#11](https://github.com/atlasconsulting/nuxt-bedita/pull/11))
+- Add BEdita API proxy for GET requests ([#12](https://github.com/atlasconsulting/nuxt-bedita/pull/12))
+
+### 🏡 Chore
+
+- **release:** V0.1.2 ([ed6899a](https://github.com/atlasconsulting/nuxt-bedita/commit/ed6899a))
+
+### 🤖 CI
+
+- Fix release script to avoid info about previous release ([bdadd34](https://github.com/atlasconsulting/nuxt-bedita/commit/bdadd34))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+- Batopa ([@batopa](http://github.com/batopa))
+
 ## v0.1.2
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.1.1...v0.1.2)
