@@ -46,7 +46,7 @@ export default defineNuxtConfig({
     apiBaseUrl: 'https://api-bedita.mydomain.com', // required
     apiKey: '<bedita-api-key>', // required
     endpoints: ['auth', 'signup'], // API endpoints added to app
-    proxyEndpoints: [], // endpoints proxied to BEdita API as is
+    proxyEndpoints: [], // endpoints proxied to BEdita API as is (by default all GET requests are proxied)
     recaptcha: {
       enabled: true, // default true
       siteKey: '<recaptcha-site-key>', // required if recaptcha is enabled

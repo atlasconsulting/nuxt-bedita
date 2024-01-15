@@ -8,14 +8,9 @@ import {
   logger,
   addTypeTemplate,
 } from '@nuxt/kit';
+import { type NitroEventHandler } from 'nitropack';
 import { defu } from 'defu';
-
-type EndpointConf = 'auth' | 'signup';
-
-type ProxyEndpointConf = {
-  path: string,
-  methods: ('GET' | 'POST' | 'PATCH' | 'DELETE' | '*')[],
-};
+import type { EndpointConf, ProxyEndpointConf } from './runtime/types';
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
@@ -69,6 +64,7 @@ export default defineNuxtModule<ModuleOptions>({
     runtimeConfig.bedita = defu(runtimeConfig.bedita || {}, {
       apiBaseUrl: options.apiBaseUrl,
       apiKey: options.apiKey,
+      proxyEndpoints: options.proxyEndpoints || [ { path: '*', methods: ['GET'] } ],
       recaptchaSecretKey: options.recaptcha.secretKey,
       resetPasswordPath: options.resetPasswordPath,
       session: options.session,
@@ -123,7 +119,7 @@ export default defineNuxtModule<ModuleOptions>({
      * Server API *
      **************
      */
-    const endpointsEnabled = [];
+    const endpointsEnabled: NitroEventHandler[] = [];
     // auth endpoints
     if (endpoints.includes('auth')) {
       endpointsEnabled.push(
@@ -164,15 +160,23 @@ export default defineNuxtModule<ModuleOptions>({
       );
     }
 
+    // BEdita API proxy
+    endpointsEnabled.push(
+      {
+        route: '/api/bedita/**',
+        handler: resolver.resolve('./runtime/server/api/bedita/api-proxy.get'),
+      }
+    );
+
     endpointsEnabled.forEach((endpoint) => {
       addServerHandler(endpoint);
       logger.info(`API endpoint ${endpoint.route} added.`);
     });
 
     /*
-     **************
+     ***************
      * Middlewares *
-     **************
+     ***************
      */
     addRouteMiddleware({
       name: 'beditaAuth',
