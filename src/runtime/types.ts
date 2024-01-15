@@ -42,3 +42,10 @@ export type SignupBeditaBody = {
   name?: string,
   surname?: string,
 } & Record<string, any>
+
+export type EndpointConf = 'auth' | 'signup';
+
+export type ProxyEndpointConf = {
+  path: string,
+  methods: ('GET' | 'POST' | 'PATCH' | 'DELETE' | '*')[],
+};
