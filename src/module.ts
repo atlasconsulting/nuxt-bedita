@@ -97,11 +97,11 @@ export default defineNuxtModule<ModuleOptions>({
     // addServerImportsDir(resolver.resolve('./runtime/server/utils'));
     addServerImports([
       {
-        from: resolver.resolve('./runtime/server/utils/bedita-client'),
-        name: 'beditaClient',
+        from: resolver.resolve('./runtime/server/utils/bedita-api-client'),
+        name: 'beditaApiClient',
       },
       {
-        from: resolver.resolve('./runtime/server/utils/bedita-client'),
+        from: resolver.resolve('./runtime/server/utils/bedita-api-client'),
         name: 'handleBeditaApiError',
       },
       {
