@@ -1,12 +1,12 @@
 import { useRecaptcha } from '../composables/useRecaptcha';
 import { useUserState } from '../states/user';
-import { computed, type ComputedRef, useRoute } from '#imports';
-import type { UserAuth } from '../types';
+import { computed, type ComputedRef, useRoute, type Ref } from '#imports';
+import type { UserAuth, UserDataStore } from '../types';
 import { filterUserDataToStore } from '../utils/user-data-store';
 import { RecaptchaActions } from '../utils/recaptcha-helpers';
 
 export const useBeditaAuth = () => {
-  const user = useUserState();
+  const user: Ref<UserDataStore | null> = useUserState();
 
   const isLogged: ComputedRef<boolean> = computed<boolean>(() => user.value !== null);
 

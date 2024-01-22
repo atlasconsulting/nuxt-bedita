@@ -1,10 +1,10 @@
 import { defineEventHandler, readBody } from 'h3';
-import { beditaClient, handleBeditaApiError } from '../../../utils/bedita-client';
+import { beditaApiClient, handleBeditaApiError } from '../../../utils/bedita-api-client';
 
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    const client = await beditaClient(event);
+    const client = await beditaApiClient(event);
     await client.post('/signup/activation', body);
 
     return { activated: true };

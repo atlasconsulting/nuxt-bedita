@@ -1,6 +1,6 @@
 import { useRuntimeConfig } from '#imports';
 import { createError, defineEventHandler, getQuery } from 'h3';
-import { beditaClient, handleBeditaApiError } from '../../utils/bedita-client';
+import { beditaApiClient, handleBeditaApiError } from '../../utils/bedita-api-client';
 import type { ApiResponseBodyResource, ApiResponseBodyList, ProxyEndpointConf } from '../../../types';
 import { type ApiResponseBodyError} from '@atlasconsulting/bedita-sdk';
 
@@ -15,7 +15,7 @@ export default defineEventHandler(async (event): Promise<ApiResponseBodyResource
   }
 
   try {
-    const client = await beditaClient(event);
+    const client = await beditaApiClient(event);
     const response = await client.get(path, { params: getQuery(event) });
 
     return { ...response.data, formattedData: response?.formattedData || {} };
