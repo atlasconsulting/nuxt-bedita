@@ -5,14 +5,14 @@ export type UserAuth = {
   roles?: string[]
 }
 
-export interface UserDataStore {
-  id: string,
-  name: string | null,
-  surname: string | null,
-  username: string | null,
-  email: string | null,
-  roles: string[],
-}
+export type UserDataStore = {
+  id: string;
+  name: string | null;
+  surname: string | null;
+  username: string | null;
+  email: string | null;
+  roles: string[];
+} & Record<string, unknown>
 
 export interface ApiResponseBodyResource extends ApiResponseBodyOk {
     formattedData?: {
