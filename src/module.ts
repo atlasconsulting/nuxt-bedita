@@ -58,7 +58,7 @@ export default defineNuxtModule<ModuleOptions>({
   },
 
   setup (options, nuxt) {
-    logger.info('Setting up nuxt-bedita...');
+    logger.start('Setting up nuxt-bedita...');
 
     const runtimeConfig = nuxt.options.runtimeConfig
     runtimeConfig.bedita = defu(runtimeConfig.bedita || {}, {
