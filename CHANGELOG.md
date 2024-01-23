@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.1
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.0...v0.2.1)
+
+### 🩹 Fixes
+
+- Add filterUserDataToStore to server imports ([#15](https://github.com/atlasconsulting/nuxt-bedita/pull/15))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.2.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.1.3...v0.2.0)
