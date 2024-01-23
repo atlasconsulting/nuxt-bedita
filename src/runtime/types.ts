@@ -12,17 +12,17 @@ export type UserDataStore = {
   username: string | null;
   email: string | null;
   roles: string[];
-} & Record<string, unknown>
+} & Record<string, any>
 
 export interface ApiResponseBodyResource extends ApiResponseBodyOk {
     formattedData?: {
-        data: JsonApiResourceObject | {},
+        data: JsonApiResourceObject | Record<string, any>,
     },
 }
 
 export interface ApiResponseBodyList extends ApiResponseBodyOk {
     formattedData?: {
-        data: JsonApiResourceObject[] | [],
+        data: JsonApiResourceObject[]  | Record<string, any>[],
     },
 }
 
