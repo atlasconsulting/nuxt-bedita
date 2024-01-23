@@ -112,6 +112,10 @@ export default defineNuxtModule<ModuleOptions>({
         from: resolver.resolve('./runtime/server/utils/session'),
         name: 'getSessionConfig',
       },
+      {
+        from: resolver.resolve('./runtime/utils/user-data-store'),
+        name: 'filterUserDataToStore',
+      },
     ]);
 
     /*
