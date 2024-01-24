@@ -20,10 +20,12 @@ const isLoaded = (resolve: Function) => {
 
 export const useRecaptcha = () => {
   if (!isRecaptchaEnabled()) {
-    console.info('Recaptcha disabled!');
     return {
-      executeRecaptcha: (): Promise<false> => Promise.resolve(false),
-    }
+      executeRecaptcha: (): Promise<false> => {
+        console.info('Recaptcha disabled!');
+        return Promise.resolve(false);
+      },
+    };
   }
 
   const recaptchaScriptAdded = useState('recaptchaScriptAdded', () => false);

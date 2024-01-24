@@ -78,6 +78,8 @@ export default defineNuxtModule<ModuleOptions>({
       }
     });
 
+    logger.info(`Recaptcha ${options.recaptcha.enabled ? 'enabled' : 'disabled'}`);
+
     const resolver = createResolver(import.meta.url);
 
     // Transpile runtime
