@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.2
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.1...v0.2.2)
+
+### 🏡 Chore
+
+- Move log recaptcha ([#16](https://github.com/atlasconsulting/nuxt-bedita/pull/16))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.2.1
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.0...v0.2.1)
