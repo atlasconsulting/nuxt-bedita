@@ -28,5 +28,5 @@ export const handleBeditaApiError = async (event: H3Event, error: AxiosError | H
     const statusCode = error instanceof H3Error ? error.statusCode : 500;
     setResponseStatus(event, statusCode);
 
-    return { 'error': error?.message || 'Some error occured :(' };
+    return { error: error?.message || 'Some error occured :(' };
 };
