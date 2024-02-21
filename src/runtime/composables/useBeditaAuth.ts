@@ -79,6 +79,17 @@ export const useBeditaAuth = () => {
     });
   };
 
+  const updateUser = async (body: Omit<UserDataStore, 'id' | 'email' | 'username' | 'roles'>) => {
+    const data = await $fetch<UserAuth>('/api/bedita/auth/user', {
+      method: 'PATCH',
+      body,
+    });
+
+    user.value = filterUserDataToStore(data);
+
+    return data;
+  };
+
   return {
     user,
     isLogged,
@@ -87,5 +98,6 @@ export const useBeditaAuth = () => {
     resetPassword,
     changePassword,
     optOut,
+    updateUser,
   };
 }

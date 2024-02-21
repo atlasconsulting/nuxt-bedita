@@ -134,6 +134,10 @@ export default defineNuxtModule<ModuleOptions>({
           handler: resolver.resolve('./runtime/server/api/bedita/auth/login.post'),
         },
         {
+          route: '/api/bedita/auth/user',
+          handler: resolver.resolve('./runtime/server/api/bedita/auth/user.patch'),
+        },
+        {
           route: '/api/bedita/auth/logout',
           handler: resolver.resolve('./runtime/server/api/bedita/auth/logout'),
         },
@@ -176,7 +180,9 @@ export default defineNuxtModule<ModuleOptions>({
 
     endpointsEnabled.forEach((endpoint) => {
       addServerHandler(endpoint);
-      logger.info(`API endpoint ${endpoint.route} added.`);
+      const methodMatch = endpoint.handler.match(/\.(get|post|patch|delete)/);
+      const method = methodMatch ? `${methodMatch[1].toUpperCase()} ` : '';
+      logger.info(`API endpoint ${method}${endpoint.route} added.`);
     });
 
     /*
