@@ -2,9 +2,9 @@ import { defineEventHandler, readBody } from 'h3';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaApiClient, handleBeditaApiError } from '../../../utils/bedita-api-client';
 import { RecaptchaActions } from '../../../../utils/recaptcha-helpers';
-import { type JsonApiResourceObject } from '@atlasconsulting/bedita-sdk';
+import { type ApiResponseBodyError, type JsonApiResourceObject } from '@atlasconsulting/bedita-sdk';
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<JsonApiResourceObject | ApiResponseBodyError> => {
   try {
     const body = await readBody(event);
 
