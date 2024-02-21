@@ -1,6 +1,38 @@
 # Changelog
 
 
+## v0.2.3
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.2...v0.2.3)
+
+### 🚀 Enhancements
+
+- Add patch user profile ([#19](https://github.com/atlasconsulting/nuxt-bedita/pull/19))
+
+### 🩹 Fixes
+
+- Improve typing ([#21](https://github.com/atlasconsulting/nuxt-bedita/pull/21))
+
+### 📖 Documentation
+
+- Introduce documentation ([#18](https://github.com/atlasconsulting/nuxt-bedita/pull/18))
+- Fix baseURL ([5870382](https://github.com/atlasconsulting/nuxt-bedita/commit/5870382))
+- Add update user documentation ([#20](https://github.com/atlasconsulting/nuxt-bedita/pull/20))
+
+### 🏡 Chore
+
+- Remove ' ([25002fc](https://github.com/atlasconsulting/nuxt-bedita/commit/25002fc))
+- Remove unused parameter ([910ace2](https://github.com/atlasconsulting/nuxt-bedita/commit/910ace2))
+
+### 🏀 Examples
+
+- **playground:** Add user profile ([f283177](https://github.com/atlasconsulting/nuxt-bedita/commit/f283177))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+- Batopa ([@batopa](http://github.com/batopa))
+
 ## v0.2.2
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.1...v0.2.2)
