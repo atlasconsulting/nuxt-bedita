@@ -1,5 +1,5 @@
 import { useRecaptcha } from '../composables/useRecaptcha';
-import { useRoute } from '#imports';
+import { useRoute, useFetch } from '#imports';
 import type { AsyncData } from '#app';
 import type { SignupBeditaBody } from '../types';
 import { RecaptchaActions } from '../utils/recaptcha-helpers';
