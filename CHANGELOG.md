@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.2.4
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.3...v0.2.4)
+
+### 🩹 Fixes
+
+- Missing useFtech import ([#22](https://github.com/atlasconsulting/nuxt-bedita/pull/22))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.2.3
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.2...v0.2.3)
