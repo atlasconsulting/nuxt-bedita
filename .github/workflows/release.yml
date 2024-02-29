@@ -5,6 +5,17 @@ on:
     types: [closed]
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      releaseType:
+        description: 'The release type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
 
 jobs:
   debug:
@@ -17,9 +28,13 @@ jobs:
         run: |
           echo "$GITHUB_CONTEXT"
   release-on-push:
-    if: github.event.pull_request.merged
+    if: github.event.pull_request.merged || inputs.releaseType != ''
     runs-on: 'ubuntu-latest'
     steps:
+      - name: Debug releaseType
+        if: inputs.releaseType != ''
+        run: |
+          echo "RELEASE TYPE: ${{ inputs.releaseType }}"
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,21 +59,21 @@ jobs:
         run: npm run dev:prepare
 
       - name: Major release
-        if: contains(github.event.pull_request.labels.*.name, 'release:major')
+        if: contains(github.event.pull_request.labels.*.name, 'release:major') || inputs.releaseType == 'major'
         run: npm run release:major
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Minor release
-        if: contains(github.event.pull_request.labels.*.name, 'release:minor')
+        if: contains(github.event.pull_request.labels.*.name, 'release:minor') || inputs.releaseType == 'minor'
         run: npm run release:minor
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Patch release
-        if: contains(github.event.pull_request.labels.*.name, 'release:patch')
+        if: contains(github.event.pull_request.labels.*.name, 'release:patch') || inputs.releaseType == 'patch'
         run: npm run release:patch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
