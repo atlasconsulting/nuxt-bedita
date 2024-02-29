@@ -67,7 +67,7 @@ That's it! You can now use BEdita Nuxt module in your Nuxt app ✨
 
 ## Usage
 
-TODO
+See [documentation](https://atlasconsulting.github.io/nuxt-bedita).
 
 ## Development
 
