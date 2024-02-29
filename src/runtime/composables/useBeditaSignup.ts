@@ -1,4 +1,4 @@
-import { useRecaptcha } from '../composables/useRecaptcha';
+import { useBeditaRecaptcha } from '../composables/useBeditaRecaptcha';
 import { useRoute, useFetch } from '#imports';
 import type { AsyncData } from '#app';
 import type { SignupBeditaBody } from '../types';
@@ -7,7 +7,7 @@ import type { ApiResponseBodyError, JsonApiResourceObject } from '@atlasconsulti
 import type { FetchError } from 'ofetch';
 
 export const useBeditaSignup = () => {
-  const { executeRecaptcha } = useRecaptcha();
+  const { executeRecaptcha } = useBeditaRecaptcha();
 
   const signup = async (data: SignupBeditaBody) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.SIGNUP);
