@@ -1,4 +1,4 @@
-import { useRecaptcha } from '../composables/useRecaptcha';
+import { useBeditaRecaptcha } from '../composables/useBeditaRecaptcha';
 import { useUserState } from '../states/user';
 import { computed, type ComputedRef, useRoute, type Ref } from '#imports';
 import type { UserAuth, UserDataStore } from '../types';
@@ -10,7 +10,7 @@ export const useBeditaAuth = () => {
 
   const isLogged: ComputedRef<boolean> = computed<boolean>(() => user.value !== null);
 
-  const { executeRecaptcha } = useRecaptcha();
+  const { executeRecaptcha } = useBeditaRecaptcha();
 
   const login = async (username: string, password: string) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.LOGIN);

@@ -17,7 +17,7 @@ Nuxt module for [BEdita API](https://github.com/bedita/bedita).
 - Nuxt 3 ready
 - Easy integration with [BEdita API](https://github.com/bedita/bedita)
 - expose API for login, logout, signup
-- Auto import composables `useBeditaAuth`, `useBeditaSignup`, `useRecaptcha` (only [v3](https://developers.google.com/recaptcha/docs/v3) version is supported)
+- Auto import composables `useBeditaAuth`, `useBeditaSignup`, `useBeditaRecaptcha` (only [v3](https://developers.google.com/recaptcha/docs/v3) version is supported)
 - Auto import server utils
 
 ## Quick Setup

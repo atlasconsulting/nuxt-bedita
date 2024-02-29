@@ -18,7 +18,7 @@ const isLoaded = (resolve: Function) => {
   resolve(true);
 }
 
-export const useRecaptcha = () => {
+export const useBeditaRecaptcha = () => {
   if (!isRecaptchaEnabled()) {
     return {
       executeRecaptcha: (): Promise<false> => {
