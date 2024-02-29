@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v0.3.0
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.4...v0.3.0)
+
+### 💅 Refactors
+
+- ⚠️  Rename useRecaptcha composable ([#25](https://github.com/atlasconsulting/nuxt-bedita/pull/25))
+
+### 🤖 CI
+
+- Add workflow dispatch for manual releases ([9fb5f1f](https://github.com/atlasconsulting/nuxt-bedita/commit/9fb5f1f))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Rename useRecaptcha composable ([#25](https://github.com/atlasconsulting/nuxt-bedita/pull/25))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+- Batopa ([@batopa](http://github.com/batopa))
+
 ## v0.2.4
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.3...v0.2.4)
