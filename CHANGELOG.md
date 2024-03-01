@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.1
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.0...v0.3.1)
+
+### 🩹 Fixes
+
+- Auto import SSR utility functions ([#26](https://github.com/atlasconsulting/nuxt-bedita/pull/26))
+
+### 📖 Documentation
+
+- Link documentation in readme ([4b84500](https://github.com/atlasconsulting/nuxt-bedita/commit/4b84500))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.3.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.2.4...v0.3.0)
