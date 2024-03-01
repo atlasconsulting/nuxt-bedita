@@ -7,6 +7,7 @@ import {
   addRouteMiddleware,
   logger,
   addTypeTemplate,
+  addImports,
 } from '@nuxt/kit';
 import { type NitroEventHandler } from 'nitropack';
 import { defu } from 'defu';
@@ -198,11 +199,22 @@ export default defineNuxtModule<ModuleOptions>({
 
     /*
      ********************************
-     * Composables and client utils *
+     * Composables and SSR utils    *
      ********************************
      */
     addImportsDir(resolver.resolve('./runtime/utils'));
     addImportsDir(resolver.resolve('./runtime/composables'));
+    // imports to use for example in route middlewares (server side)
+    addImports([
+      {
+        from: resolver.resolve('./runtime/server/utils/session'),
+        name: 'getSessionConfig',
+      },
+      {
+        from: resolver.resolve('./runtime/server/utils/bedita-api-client'),
+        name: 'beditaApiClient',
+      },
+    ]);
 
     /*
      *****************
