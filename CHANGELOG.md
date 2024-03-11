@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.3.2
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.1...v0.3.2)
+
+### 🚀 Enhancements
+
+- Introduce routes guard ([#27](https://github.com/atlasconsulting/nuxt-bedita/pull/27))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.3.1
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.0...v0.3.1)
