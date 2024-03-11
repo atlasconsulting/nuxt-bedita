@@ -17,6 +17,13 @@ import type { EndpointConf, ProxyEndpointConf } from './runtime/types';
 export interface ModuleOptions {
   apiBaseUrl: string,
   apiKey: string,
+  auth: {
+    global?: boolean,
+    required?: boolean,
+    unauthenticatedRedirect?: string,
+    publicRoutes?: string[],
+    rolesGuard?: Record<string, string[]>,
+  },
   endpoints?: EndpointConf[],
   proxyEndpoints?: ProxyEndpointConf[],
   recaptcha: {
@@ -46,6 +53,13 @@ export default defineNuxtModule<ModuleOptions>({
   defaults: {
     apiBaseUrl: '',
     apiKey: '',
+    auth: {
+      global: true,
+      required: false,
+      publicRoutes: [],
+      unauthenticatedRedirect: '/sign-in',
+      rolesGuard: {},
+    },
     recaptcha: {
       enabled: false,
       hideBadge: false,
@@ -61,6 +75,8 @@ export default defineNuxtModule<ModuleOptions>({
   setup (options, nuxt) {
     logger.start('Setting up nuxt-bedita...');
 
+    options.auth.publicRoutes?.push(options.auth.unauthenticatedRedirect as string);
+
     const runtimeConfig = nuxt.options.runtimeConfig
     runtimeConfig.bedita = defu(runtimeConfig.bedita || {}, {
       apiBaseUrl: options.apiBaseUrl,
@@ -71,6 +87,14 @@ export default defineNuxtModule<ModuleOptions>({
       session: options.session,
     });
     runtimeConfig.public = defu(runtimeConfig.public || {}, {
+      bedita: {
+        auth: {
+          unauthenticatedRedirect: options.auth.unauthenticatedRedirect,
+          required: options.auth.required,
+          publicRoutes: options.auth.publicRoutes,
+          rolesGuard: options.auth.rolesGuard,
+        },
+      },
       recaptcha: {
         enabled: options.recaptcha.enabled,
         siteKey: options.recaptcha.siteKey,
@@ -194,7 +218,7 @@ export default defineNuxtModule<ModuleOptions>({
     addRouteMiddleware({
       name: 'beditaAuth',
       path: resolver.resolve('./runtime/middleware/auth'),
-      global: true,
+      global: options.auth.global,
     });
 
     /*

@@ -35,7 +35,7 @@ yarn add --dev @atlasconsulting/nuxt-bedita
 npm install --save-dev @atlasconsulting/nuxt-bedita
 ```
 
-2. Add `@atlasconsulting/nuxt-bedita` to the `modules` section of `nuxt.config.ts`
+2. Add `@atlasconsulting/nuxt-bedita` to the `modules` section of `nuxt.config.ts`.
 
 ```js
 export default defineNuxtConfig({
@@ -45,6 +45,13 @@ export default defineNuxtConfig({
   bedita: {
     apiBaseUrl: 'https://api-bedita.mydomain.com', // required
     apiKey: '<bedita-api-key>', // required
+    auth: { // optional
+      global: true, // install beditaAuth as global middleware or not
+      required: false, // require user authenticated for every routes
+      publicRoutes: [], // public routes, no authentication is required
+      unauthenticatedRedirect: '/sign-in', // unauthenticated redirect route
+      rolesGuard: {}, // roles guard (based on BEdita user's roles)
+    },
     endpoints: ['auth', 'signup'], // API endpoints added to app
     proxyEndpoints: [], // endpoints proxied to BEdita API as is (by default all GET requests are proxied)
     recaptcha: {
@@ -62,6 +69,7 @@ export default defineNuxtConfig({
   }
 })
 ```
+> See [documentation](https://atlasconsulting.github.io/nuxt-bedita/getting-started/configuration) for more details. 
 
 That's it! You can now use BEdita Nuxt module in your Nuxt app ✨
 
