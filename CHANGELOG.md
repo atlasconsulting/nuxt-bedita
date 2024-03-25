@@ -1,6 +1,20 @@
 # Changelog
 
 
+## v0.3.3
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.2...v0.3.3)
+
+### 🚀 Enhancements
+
+- Add dependabot.yml ([#28](https://github.com/atlasconsulting/nuxt-bedita/pull/28))
+- Add "redirect" query string on sign-in redirect ([#29](https://github.com/atlasconsulting/nuxt-bedita/pull/29))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+- Dante Di Domenico ([@didoda](http://github.com/didoda))
+
 ## v0.3.2
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.1...v0.3.2)
