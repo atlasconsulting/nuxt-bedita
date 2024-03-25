@@ -26,9 +26,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   const { user, isLogged } = useBeditaAuth();
 
+  const redirectObject =  {
+    path: config.public.bedita.auth.unauthenticatedRedirect,
+    query: { redirect: to.fullPath },
+  };
+
   // if auth is required and user is not logged, redirect to login page
   if (config.public.bedita.auth.required && !isLogged.value) {
-    return navigateTo(config.public.bedita.auth.unauthenticatedRedirect);
+    return navigateTo(redirectObject);
   }
 
   // check if user has required roles to access the route
@@ -40,7 +45,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // There are roles guard for this route, but user is not logged
   if (!isLogged.value) {
-    return navigateTo(config.public.bedita.auth.unauthenticatedRedirect);
+    return navigateTo(redirectObject);
   }
 
   // if user has at least a role for the guard, then user is authorized
