@@ -41,11 +41,14 @@ const error = ref(false);
 const isLoading = ref(false);
 const showCustomBadge = useRuntimeConfig().public.recaptcha.hideBadge;
 
+const r = useRoute();
+
 const authenticate = async () => {
   error.value = false;
   isLoading.value = true;
   try {
     await login(username.value, password.value);
+    navigateTo(r.query?.redirect as string || '/');
   } catch (e) {
     error.value = true;
   }

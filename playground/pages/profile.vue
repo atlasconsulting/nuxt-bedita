@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Profile Page</h2>
     <div v-if="!isLogged">You have to be logged to see your profile.</div>
     <div v-else>
       <form @submit.prevent="save">

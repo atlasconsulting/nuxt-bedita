@@ -3,6 +3,12 @@ export default defineNuxtConfig({
   bedita: {
     apiBaseUrl: '',
     apiKey: '',
+    auth: {
+      unauthenticatedRedirect: '/login',
+      rolesGuard: {
+        '/profile': ['*'],
+      },
+    },
     recaptcha: {
       enabled: true,
       siteKey: '',
