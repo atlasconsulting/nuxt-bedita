@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v0.3.4
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.3...v0.3.4)
+
+### 🚀 Enhancements
+
+- Enable API proxy for POST, PATCH and DELETE methods ([#30](https://github.com/atlasconsulting/nuxt-bedita/pull/30))
+
+### 📖 Documentation
+
+- Add section about "redirect" query string ([21fd6f3](https://github.com/atlasconsulting/nuxt-bedita/commit/21fd6f3))
+
+### 🏀 Examples
+
+- **playground:** Protect profile page to test redirect query string ([1d5d63b](https://github.com/atlasconsulting/nuxt-bedita/commit/1d5d63b))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.3.3
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.2...v0.3.3)
