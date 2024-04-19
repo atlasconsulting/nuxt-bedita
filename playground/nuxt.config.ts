@@ -19,7 +19,13 @@ export default defineNuxtConfig({
     session: {
       name: '',
       secret: '',
-    }
+    },
+    proxyEndpoints: [
+      {
+        path: '/documents',
+        methods: ['*'],
+      },
+    ],
   },
   devtools: { enabled: true }
 })
