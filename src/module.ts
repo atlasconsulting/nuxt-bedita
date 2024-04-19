@@ -200,7 +200,19 @@ export default defineNuxtModule<ModuleOptions>({
       {
         route: '/api/bedita/**',
         handler: resolver.resolve('./runtime/server/api/bedita/api-proxy.get'),
-      }
+      },
+      {
+        route: '/api/bedita/**',
+        handler: resolver.resolve('./runtime/server/api/bedita/api-proxy.post'),
+      },
+      {
+        route: '/api/bedita/**',
+        handler: resolver.resolve('./runtime/server/api/bedita/api-proxy.patch'),
+      },
+      {
+        route: '/api/bedita/**',
+        handler: resolver.resolve('./runtime/server/api/bedita/api-proxy.delete'),
+      },
     );
 
     endpointsEnabled.forEach((endpoint) => {
