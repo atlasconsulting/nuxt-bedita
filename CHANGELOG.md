@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.3.5
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.4...v0.3.5)
+
+### 🚀 Enhancements
+
+- Introduce roles guard middleware ([#31](https://github.com/atlasconsulting/nuxt-bedita/pull/31))
+
+### 📖 Documentation
+
+- Add POST, PATCH, DELETE api proxy routes ([994d388](https://github.com/atlasconsulting/nuxt-bedita/commit/994d388))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.3.4
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.3...v0.3.4)
