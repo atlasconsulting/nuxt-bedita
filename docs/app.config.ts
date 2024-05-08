@@ -20,7 +20,7 @@ export default defineAppConfig({
       fluid: true
     },
     header: {
-      logo: false,
+      logo: true,
       showLinkIcon: true,
       exclude: [],
       fluid: true
