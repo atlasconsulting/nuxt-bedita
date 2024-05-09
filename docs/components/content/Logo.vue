@@ -1,6 +1,6 @@
 <template>
   <div class="logo-container ">
-    <img src="/public/be-nuxt-no-margin.svg" alt="Nuxt BEdita">
+    <img src="/be-nuxt-no-margin.svg" alt="Nuxt BEdita">
     <span>Nuxt BEdita</span>
   </div>
 </template>
