@@ -1,6 +1,6 @@
-import { BEditaApiClient, MapIncludedInterceptor, type ApiResponseBodyError } from '@atlasconsulting/bedita-sdk';
+import { BEditaApiClient, MapIncludedInterceptor, type ApiResponseBodyError, type MapIncludedConfig } from '@atlasconsulting/bedita-sdk';
 import { AxiosError, isAxiosError } from 'axios';
-import { type H3Event, setResponseStatus, useSession, H3Error } from 'h3';
+import { type H3Event, setResponseStatus, useSession, H3Error, getQuery } from 'h3';
 import SessionStorageAdapter from '../services/adapters/session-storage-adapter';
 import { getSessionConfig } from './session';
 import { useRuntimeConfig } from '#imports';
@@ -13,7 +13,14 @@ export const beditaApiClient = async (event: H3Event): Promise<BEditaApiClient> 
     apiKey: config.bedita.apiKey,
     storageAdapter: new SessionStorageAdapter(session),
   });
-  client.addInterceptor(new MapIncludedInterceptor());
+
+  const options: MapIncludedConfig = {};
+  const lang = getQuery(event)?.lang;
+  if (config.bedita.replaceTranslations && lang) {
+    options.replaceWithTranslation = lang as string;
+  }
+
+  client.addInterceptor(new MapIncludedInterceptor(options));
 
   return client;
 };
