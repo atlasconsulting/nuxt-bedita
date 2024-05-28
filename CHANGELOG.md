@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.3.6
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.5...v0.3.6)
+
+### 🚀 Enhancements
+
+- Add replace translations conf ([#32](https://github.com/atlasconsulting/nuxt-bedita/pull/32))
+
+### 📖 Documentation
+
+- Add beditaRolesGuard middleware ([bbe52a0](https://github.com/atlasconsulting/nuxt-bedita/commit/bbe52a0))
+- Logo component ([0ac1ebf](https://github.com/atlasconsulting/nuxt-bedita/commit/0ac1ebf))
+- Improve list of features ([9caf9f5](https://github.com/atlasconsulting/nuxt-bedita/commit/9caf9f5))
+- Change title ([9906e23](https://github.com/atlasconsulting/nuxt-bedita/commit/9906e23))
+- Fix image src ([1dc4403](https://github.com/atlasconsulting/nuxt-bedita/commit/1dc4403))
+- Update configuration page with replaceTranslations option ([6bccb1b](https://github.com/atlasconsulting/nuxt-bedita/commit/6bccb1b))
+
+### 🏡 Chore
+
+- Fix tabs spaces ([1319903](https://github.com/atlasconsulting/nuxt-bedita/commit/1319903))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.3.5
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.4...v0.3.5)
