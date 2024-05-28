@@ -33,6 +33,7 @@ export interface ModuleOptions {
     hideBadge?: boolean,
     useRecaptchaNet?: boolean,
   },
+  replaceTranslations?: boolean,
   resetPasswordPath?: string,
   session: {
     name: string,
@@ -65,6 +66,7 @@ export default defineNuxtModule<ModuleOptions>({
       hideBadge: false,
       useRecaptchaNet: false,
     },
+    replaceTranslations: false,
     resetPasswordPath: '/reset-password',
     session: {
       name: 'bedita',
@@ -83,6 +85,7 @@ export default defineNuxtModule<ModuleOptions>({
       apiKey: options.apiKey,
       proxyEndpoints: options.proxyEndpoints || [ { path: '*', methods: ['GET'] } ],
       recaptchaSecretKey: options.recaptcha.secretKey,
+      replaceTranslations: options.replaceTranslations,
       resetPasswordPath: options.resetPasswordPath,
       session: options.session,
     });
