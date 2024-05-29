@@ -61,6 +61,7 @@ export default defineNuxtConfig({
       hideBadge: false, // default false, hide Recaptcha badge (https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed)
       useRecaptchaNet: true, // default true, allow to use the domain `recaptcha.net` instead of `google.com`
     },
+    replaceTranslations: true, // replace main objects languages using `lang` query string
     resetPasswordPath: '/reset-password', // route path to page used for password reset. Sent via email to user in the forgotten password flow.
     session: {
       name: 'bedita', // session cookie name
