@@ -1,6 +1,24 @@
 # Changelog
 
 
+## v0.3.7
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.6...v0.3.7)
+
+### 🚀 Enhancements
+
+- Ability to customize user properties saved in session ([116331d](https://github.com/atlasconsulting/nuxt-bedita/commit/116331d))
+
+### 📖 Documentation
+
+- **README:** Add replaceTranslations to conf example ([a244a67](https://github.com/atlasconsulting/nuxt-bedita/commit/a244a67))
+- **playground:** Print all user properties saved in session ([10a3936](https://github.com/atlasconsulting/nuxt-bedita/commit/10a3936))
+- Document sessionUserProps key ([0fdd843](https://github.com/atlasconsulting/nuxt-bedita/commit/0fdd843))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.3.6
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.5...v0.3.6)
