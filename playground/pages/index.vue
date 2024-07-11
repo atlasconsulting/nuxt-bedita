@@ -2,6 +2,7 @@
   <div>
     <div v-if="isLogged">
       <p>Hello {{ user?.name }} {{ user?.surname }}</p>
+      <pre>{{ user }}</pre>
     </div>
     <ul>
       <li><NuxtLink to="/login">Login / Logout</NuxtLink></li>

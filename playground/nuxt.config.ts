@@ -8,6 +8,7 @@ export default defineNuxtConfig({
       rolesGuard: {
         '/profile': ['*'],
       },
+      sessionUserProps: ['created', 'description'],
     },
     recaptcha: {
       enabled: true,
