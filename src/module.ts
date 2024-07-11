@@ -23,6 +23,7 @@ export interface ModuleOptions {
     unauthenticatedRedirect?: string,
     publicRoutes?: string[],
     rolesGuard?: Record<string, string[]>,
+    sessionUserProps?: string[],
   },
   endpoints?: EndpointConf[],
   proxyEndpoints?: ProxyEndpointConf[],
@@ -60,6 +61,7 @@ export default defineNuxtModule<ModuleOptions>({
       publicRoutes: [],
       unauthenticatedRedirect: '/sign-in',
       rolesGuard: {},
+      sessionUserProps: [],
     },
     recaptcha: {
       enabled: false,
@@ -96,6 +98,7 @@ export default defineNuxtModule<ModuleOptions>({
           required: options.auth.required,
           publicRoutes: options.auth.publicRoutes,
           rolesGuard: options.auth.rolesGuard,
+          sessionUserProps: options.auth.sessionUserProps,
         },
       },
       recaptcha: {
