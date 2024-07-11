@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.3.8
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.7...v0.3.8)
+
+### 🩹 Fixes
+
+- Import useRuntimeConfig ([e9a766f](https://github.com/atlasconsulting/nuxt-bedita/commit/e9a766f))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.3.7
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.6...v0.3.7)
