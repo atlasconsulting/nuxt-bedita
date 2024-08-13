@@ -1,11 +1,11 @@
-import { defineNuxtRouteMiddleware, useRuntimeConfig, navigateTo, abortNavigation, createError } from '#imports';
 import { useBeditaAuth } from '../composables/useBeditaAuth';
+import { defineNuxtRouteMiddleware, useRuntimeConfig, navigateTo, abortNavigation, createError } from '#imports';
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const config = useRuntimeConfig();
   const { user, isLogged } = useBeditaAuth();
 
-  const redirectObject =  {
+  const redirectObject = {
     path: config.public.bedita.auth.unauthenticatedRedirect,
     query: { redirect: to.fullPath },
   };
@@ -21,7 +21,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
       createError({
         statusCode: 500,
         message: 'roles passed to beditaRolesGuard middleware must be an array',
-      })
+      }),
     );
   }
 
@@ -35,6 +35,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
     createError({
       statusCode: 403,
       message: 'Forbidden. You are not authorized to access this page.',
-    })
+    }),
   );
 });

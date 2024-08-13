@@ -1,14 +1,14 @@
-import { useState, useRuntimeConfig, useHead } from '#imports';
 import { isRecaptchaEnabled } from '../utils/recaptcha-helpers';
+import { useState, useRuntimeConfig, useHead } from '#imports';
 
 declare global {
-    interface Window {
-        grecaptcha: any
-    }
+  interface Window {
+    grecaptcha: any;
+  }
 }
 
 // Ensure that `grecaptcha` is available
-const isLoaded = (resolve: Function) => {
+const isLoaded = (resolve: any) => {
   if (window.grecaptcha === undefined) {
     setTimeout(() => isLoaded(resolve), 25);
 
@@ -16,7 +16,7 @@ const isLoaded = (resolve: Function) => {
   }
 
   resolve(true);
-}
+};
 
 export const useBeditaRecaptcha = () => {
   if (!isRecaptchaEnabled()) {
@@ -33,7 +33,7 @@ export const useBeditaRecaptcha = () => {
 
   if (!recaptchaScriptAdded.value) {
     const recaptchaBaseUrl = runtimeConfig.public.recaptcha.useRecaptchaNet ? 'https://www.recaptcha.net' : 'https://www.google.com';
-    const style = runtimeConfig.public.recaptcha.hideBadge ? [ { innerHTML: '.grecaptcha-badge { visibility: hidden; }' } ] : [];
+    const style = runtimeConfig.public.recaptcha.hideBadge ? [{ innerHTML: '.grecaptcha-badge { visibility: hidden; }' }] : [];
     useHead({
       script: [
         {
@@ -47,7 +47,7 @@ export const useBeditaRecaptcha = () => {
     recaptchaScriptAdded.value = true;
   }
 
-  const recaptchaLoaded = () => new Promise((resolve) => isLoaded(resolve));
+  const recaptchaLoaded = () => new Promise(resolve => isLoaded(resolve));
 
   const executeRecaptcha = async (action: string): Promise<string> => {
     await recaptchaLoaded();

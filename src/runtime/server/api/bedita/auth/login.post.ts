@@ -1,6 +1,6 @@
 import { FormatUserInterceptor } from '@atlasconsulting/bedita-sdk';
-import { filterUserDataToStore } from '../../../../utils/user-data-store';
 import { defineEventHandler, readBody } from 'h3';
+import { filterUserDataToStore } from '../../../../utils/user-data-store';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaApiClient, handleBeditaApiError } from '../../../utils/bedita-api-client';
 import type { UserAuth } from '../../../../types';

@@ -5,5 +5,5 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/nuxt-bedita/',
   },
-  modules: []
-})
+  modules: [],
+});

@@ -41,8 +41,7 @@
 
 <script setup lang="ts">
 import type { JsonApiResourceObject } from '@atlasconsulting/bedita-sdk';
-import type { ApiResponseBodyResource } from '@atlasconsulting/nuxt-bedita';
-import type { ApiResponseBodyList } from '@atlasconsulting/nuxt-bedita';
+import type { ApiResponseBodyResource, ApiResponseBodyList } from '@atlasconsulting/nuxt-bedita';
 
 const title = ref('');
 const editObject = ref<JsonApiResourceObject>();
@@ -63,7 +62,7 @@ const saveObj = async () => {
             title: title.value,
           },
         },
-      }
+      },
     });
 
     title.value = '';
@@ -90,7 +89,7 @@ const editObj = async (e: Event) => {
             title: formData.get('title'),
           },
         },
-      }
+      },
     });
 
     editObject.value = undefined;
@@ -107,7 +106,7 @@ const editObj = async (e: Event) => {
   } catch (e) {
     console.error(e);
   }
-}
+};
 
 const deleteObj = async (id: string) => {
   try {
@@ -143,5 +142,5 @@ const uploadFile = async (event: Event) => {
   } catch (e) {
     console.error(e);
   }
-}
+};
 </script>

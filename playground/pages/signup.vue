@@ -82,6 +82,5 @@ const submit = async () => {
     error.value = true;
   }
   isLoading.value = false;
-}
-
+};
 </script>

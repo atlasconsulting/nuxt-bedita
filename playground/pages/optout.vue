@@ -47,6 +47,5 @@ const deleteAccount = async () => {
     error.value = true;
   }
   isLoading.value = false;
-}
-
+};
 </script>

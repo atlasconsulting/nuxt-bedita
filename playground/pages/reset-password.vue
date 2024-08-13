@@ -49,6 +49,5 @@ const change = async (login = false) => {
     error.value = true;
   }
   isLoading.value = false;
-}
-
+};
 </script>

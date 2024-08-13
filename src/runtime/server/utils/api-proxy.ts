@@ -1,8 +1,8 @@
-import { useRuntimeConfig } from '#imports';
-import { H3Event, readBody, readRawBody, getQuery, getHeader, setResponseStatus, createError, assertMethod, type HTTPMethod } from 'h3';
+import type { H3Event, readBody, readRawBody, getQuery, getHeader, setResponseStatus, createError, assertMethod, type HTTPMethod } from 'h3';
+import type { BEditaClientRequestConfig } from '@atlasconsulting/bedita-sdk';
 import type { ProxyEndpointConf } from '../../types';
 import { beditaApiClient } from './bedita-api-client';
-import type { BEditaClientRequestConfig } from '@atlasconsulting/bedita-sdk';
+import { useRuntimeConfig } from '#imports';
 
 const isEndpointAllowed = (path: string, method: HTTPMethod) => {
   const config = useRuntimeConfig();
@@ -10,7 +10,7 @@ const isEndpointAllowed = (path: string, method: HTTPMethod) => {
     .filter((e: ProxyEndpointConf) => e.methods.includes('*') || e.methods.includes(method as 'GET' | 'POST' | 'PATCH' | 'DELETE'));
 
   return allowedEndpoints.length && allowedEndpoints.filter(endpoint => endpoint.path === '*' || path.startsWith(endpoint.path)).length > 0;
-}
+};
 
 /**
  * Check if the requested API endpoint is allowed to be proxied and return the API path.
@@ -31,7 +31,7 @@ export const getBeditaApiPath = (event: H3Event): string => {
       throw createError({
         statusCode: 405,
         statusMessage: 'Method Not Allowed',
-        message: `Method ${event.method} not allowed for the requested API endpoint.`
+        message: `Method ${event.method} not allowed for the requested API endpoint.`,
       });
     }
   }
@@ -39,7 +39,7 @@ export const getBeditaApiPath = (event: H3Event): string => {
   throw createError({
     statusCode: 404,
     statusMessage: 'Not Found',
-    message: 'API proxy endpoint not found'
+    message: 'API proxy endpoint not found',
   });
 };
 
@@ -67,4 +67,4 @@ export const apiProxyRequest = async (event: H3Event) => {
   setResponseStatus(event, response.status);
 
   return response;
-}
+};

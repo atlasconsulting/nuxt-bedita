@@ -1,8 +1,8 @@
 import { defineEventHandler, readBody, getRequestURL, setResponseStatus } from 'h3';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaApiClient, handleBeditaApiError } from '../../../utils/bedita-api-client';
-import { useRuntimeConfig } from '#imports';
 import { RecaptchaActions } from '../../../../utils/recaptcha-helpers';
+import { useRuntimeConfig } from '#imports';
 
 export default defineEventHandler(async (event) => {
   try {

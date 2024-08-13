@@ -1,4 +1,4 @@
-import { useRuntimeConfig } from "#imports";
+import { useRuntimeConfig } from '#imports';
 
 export const RecaptchaActions = {
   LOGIN: 'login',
@@ -10,4 +10,4 @@ export const RecaptchaActions = {
 
 export const isRecaptchaEnabled = () => {
   return !!useRuntimeConfig().public.recaptcha.enabled === true;
-}
+};

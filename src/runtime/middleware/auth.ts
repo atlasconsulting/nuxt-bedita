@@ -1,15 +1,15 @@
-import { defineNuxtRouteMiddleware, useRequestEvent, useRuntimeConfig, navigateTo, abortNavigation, createError } from '#imports';
 import { beditaApiClient } from '../server/utils/bedita-api-client';
-import { UserDataStore } from '../types';
+import type { UserDataStore } from '../types';
 import { useUserState } from '../states/user';
 import { useBeditaAuth } from '../composables/useBeditaAuth';
+import { defineNuxtRouteMiddleware, useRequestEvent, useRuntimeConfig, navigateTo, abortNavigation, createError } from '#imports';
 
 export default defineNuxtRouteMiddleware(async (to) => {
   // SERVER SIDE: set user state from session data
-  if (process.server) {
+  if (import.meta.server) {
     const event = useRequestEvent();
     const client = await beditaApiClient(event);
-    const userData: UserDataStore | null  = await client.getStorageService().get('user');
+    const userData: UserDataStore | null = await client.getStorageService().get('user');
 
     if (userData) {
       const user = useUserState();
@@ -26,7 +26,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   const { user, isLogged } = useBeditaAuth();
 
-  const redirectObject =  {
+  const redirectObject = {
     path: config.public.bedita.auth.unauthenticatedRedirect,
     query: { redirect: to.fullPath },
   };
@@ -58,6 +58,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
     createError({
       statusCode: 403,
       message: 'Forbidden. You are not authorized to access this page.',
-    })
+    }),
   );
 });

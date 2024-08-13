@@ -7,23 +7,23 @@ export default defineAppConfig({
       nuxt: {
         label: 'Nuxt',
         icon: 'simple-icons:nuxtdotjs',
-        href: 'https://nuxt.com'
-      }
+        href: 'https://nuxt.com',
+      },
     },
     aside: {
       level: 0,
       collapsed: false,
-      exclude: []
+      exclude: [],
     },
     main: {
       padded: true,
-      fluid: true
+      fluid: true,
     },
     header: {
       logo: true,
       showLinkIcon: true,
       exclude: [],
-      fluid: true
-    }
-  }
-})
+      fluid: true,
+    },
+  },
+});

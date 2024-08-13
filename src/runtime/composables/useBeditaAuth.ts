@@ -1,9 +1,9 @@
 import { useBeditaRecaptcha } from '../composables/useBeditaRecaptcha';
 import { useUserState } from '../states/user';
-import { computed, type ComputedRef, useRoute, type Ref } from '#imports';
 import type { UserAuth, UserDataStore } from '../types';
 import { filterUserDataToStore } from '../utils/user-data-store';
 import { RecaptchaActions } from '../utils/recaptcha-helpers';
+import { computed, type ComputedRef, useRoute, type Ref } from '#imports';
 
 export const useBeditaAuth = () => {
   const user: Ref<UserDataStore | null> = useUserState();
@@ -19,7 +19,7 @@ export const useBeditaAuth = () => {
       body: {
         username,
         password,
-        recaptcha_token
+        recaptcha_token,
       },
     });
 
@@ -40,7 +40,7 @@ export const useBeditaAuth = () => {
       method: 'POST',
       body: {
         contact,
-        recaptcha_token
+        recaptcha_token,
       },
     });
   };
@@ -55,7 +55,7 @@ export const useBeditaAuth = () => {
         uuid: uuid || route.query?.uuid,
         password,
         login,
-        recaptcha_token
+        recaptcha_token,
       },
     });
 
@@ -74,7 +74,7 @@ export const useBeditaAuth = () => {
       body: {
         username,
         password,
-        recaptcha_token
+        recaptcha_token,
       },
     });
   };
@@ -100,4 +100,4 @@ export const useBeditaAuth = () => {
     optOut,
     updateUser,
   };
-}
+};

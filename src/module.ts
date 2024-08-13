@@ -15,31 +15,31 @@ import type { EndpointConf, ProxyEndpointConf } from './runtime/types';
 
 // Module options TypeScript interface definition
 export interface ModuleOptions {
-  apiBaseUrl: string,
-  apiKey: string,
+  apiBaseUrl: string;
+  apiKey: string;
   auth: {
-    global?: boolean,
-    required?: boolean,
-    unauthenticatedRedirect?: string,
-    publicRoutes?: string[],
-    rolesGuard?: Record<string, string[]>,
-    sessionUserProps?: string[],
-  },
-  endpoints?: EndpointConf[],
-  proxyEndpoints?: ProxyEndpointConf[],
+    global?: boolean;
+    required?: boolean;
+    unauthenticatedRedirect?: string;
+    publicRoutes?: string[];
+    rolesGuard?: Record<string, string[]>;
+    sessionUserProps?: string[];
+  };
+  endpoints?: EndpointConf[];
+  proxyEndpoints?: ProxyEndpointConf[];
   recaptcha: {
-    enabled: boolean,
-    siteKey?: string,
-    secretKey?: string,
-    hideBadge?: boolean,
-    useRecaptchaNet?: boolean,
-  },
-  replaceTranslations?: boolean,
-  resetPasswordPath?: string,
+    enabled: boolean;
+    siteKey?: string;
+    secretKey?: string;
+    hideBadge?: boolean;
+    useRecaptchaNet?: boolean;
+  };
+  replaceTranslations?: boolean;
+  resetPasswordPath?: string;
   session: {
-    name: string,
-    secret: string,
-  },
+    name: string;
+    secret: string;
+  };
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -47,7 +47,7 @@ export default defineNuxtModule<ModuleOptions>({
     name: '@atlasconsulting/nuxt-bedita',
     configKey: 'bedita',
     compatibility: {
-      nuxt: '^3.0.0'
+      nuxt: '^3.0.0',
     },
   },
 
@@ -76,16 +76,16 @@ export default defineNuxtModule<ModuleOptions>({
     },
   },
 
-  setup (options, nuxt) {
+  setup(options, nuxt) {
     logger.start('Setting up nuxt-bedita...');
 
     options.auth.publicRoutes?.push(options.auth.unauthenticatedRedirect as string);
 
-    const runtimeConfig = nuxt.options.runtimeConfig
+    const runtimeConfig = nuxt.options.runtimeConfig;
     runtimeConfig.bedita = defu(runtimeConfig.bedita || {}, {
       apiBaseUrl: options.apiBaseUrl,
       apiKey: options.apiKey,
-      proxyEndpoints: options.proxyEndpoints || [ { path: '*', methods: ['GET'] } ],
+      proxyEndpoints: options.proxyEndpoints || [{ path: '*', methods: ['GET'] }],
       recaptchaSecretKey: options.recaptcha.secretKey,
       replaceTranslations: options.replaceTranslations,
       resetPasswordPath: options.resetPasswordPath,
@@ -106,7 +106,7 @@ export default defineNuxtModule<ModuleOptions>({
         siteKey: options.recaptcha.siteKey,
         hideBadge: options.recaptcha.hideBadge,
         useRecaptchaNet: options.recaptcha.useRecaptchaNet,
-      }
+      },
     });
 
     logger.info(`Recaptcha ${options.recaptcha.enabled ? 'enabled' : 'disabled'}`);
@@ -183,7 +183,7 @@ export default defineNuxtModule<ModuleOptions>({
         {
           route: '/api/bedita/auth/optout',
           handler: resolver.resolve('./runtime/server/api/bedita/auth/optout.post'),
-        }
+        },
       );
     }
 
@@ -279,5 +279,5 @@ export default defineNuxtModule<ModuleOptions>({
     });
 
     logger.success('nuxt-bedita ready');
-  }
+  },
 });

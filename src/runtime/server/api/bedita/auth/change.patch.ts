@@ -1,10 +1,10 @@
 import { defineEventHandler, readBody } from 'h3';
+import { type BEditaClientRequestConfig, FormatUserInterceptor } from '@atlasconsulting/bedita-sdk';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaApiClient, handleBeditaApiError } from '../../../utils/bedita-api-client';
 import { RecaptchaActions } from '../../../../utils/recaptcha-helpers';
 import type { UserAuth } from '../../../../types';
 import { filterUserDataToStore } from '../../../../utils/user-data-store';
-import { type BEditaClientRequestConfig, FormatUserInterceptor } from '@atlasconsulting/bedita-sdk';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -17,8 +17,8 @@ export default defineEventHandler(async (event) => {
       login: body?.login === true,
     };
     const requestConfig: BEditaClientRequestConfig = {
-      responseInterceptors: [ new FormatUserInterceptor(client) ]
-    }
+      responseInterceptors: [new FormatUserInterceptor(client)],
+    };
     const response = await client.patch('/auth/change', payload, requestConfig);
 
     // if login is true it fills session with tokens and user data
@@ -34,4 +34,3 @@ export default defineEventHandler(async (event) => {
     return handleBeditaApiError(event, error);
   }
 });
-

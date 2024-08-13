@@ -1,4 +1,4 @@
-import type { UserAuth, UserDataStore } from "../types";
+import type { UserAuth, UserDataStore } from '../types';
 import { useRuntimeConfig } from '#imports';
 
 export const filterUserDataToStore = (data: UserAuth): UserDataStore => {

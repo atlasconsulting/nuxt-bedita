@@ -2,8 +2,8 @@ import type { ApiResponseBodyOk, JsonApiResourceObject } from '@atlasconsulting/
 
 export type UserAuth = {
   data: JsonApiResourceObject & { id: string };
-  roles?: string[]
-}
+  roles?: string[];
+};
 
 export type UserDataStore = {
   id: string;
@@ -12,40 +12,40 @@ export type UserDataStore = {
   username: string | null;
   email: string | null;
   roles: string[];
-} & Record<string, any>
+} & Record<string, any>;
 
 export interface ApiResponseBodyResource extends ApiResponseBodyOk {
-    formattedData?: {
-        data: JsonApiResourceObject | Record<string, any>,
-    },
+  formattedData?: {
+    data: JsonApiResourceObject | Record<string, any>;
+  };
 }
 
 export interface ApiResponseBodyList extends ApiResponseBodyOk {
-    formattedData?: {
-        data: JsonApiResourceObject[]  | Record<string, any>[],
-    },
+  formattedData?: {
+    data: JsonApiResourceObject[] | Record<string, any>[];
+  };
 }
 
 export type RecaptchaResponse = {
-  success: boolean;
-  score?: number;
-  action?: string;
-  challenge_ts?: string;
-  hostname?: string;
+  'success': boolean;
+  'score'?: number;
+  'action'?: string;
+  'challenge_ts'?: string;
+  'hostname'?: string;
   'error-codes'?: string[];
 };
 
 export type SignupBeditaBody = {
-  username: string,
-  password: string,
-  email: string,
-  name?: string,
-  surname?: string,
-} & Record<string, any>
+  username: string;
+  password: string;
+  email: string;
+  name?: string;
+  surname?: string;
+} & Record<string, any>;
 
 export type EndpointConf = 'auth' | 'signup';
 
 export type ProxyEndpointConf = {
-  path: string,
-  methods: ('GET' | 'POST' | 'PATCH' | 'DELETE' | '*')[],
+  path: string;
+  methods: ('GET' | 'POST' | 'PATCH' | 'DELETE' | '*')[];
 };

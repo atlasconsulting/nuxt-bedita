@@ -1,10 +1,10 @@
-import { useBeditaRecaptcha } from '../composables/useBeditaRecaptcha';
-import { useRoute, useFetch } from '#imports';
-import type { AsyncData } from '#app';
-import type { SignupBeditaBody } from '../types';
-import { RecaptchaActions } from '../utils/recaptcha-helpers';
 import type { ApiResponseBodyError, JsonApiResourceObject } from '@atlasconsulting/bedita-sdk';
 import type { FetchError } from 'ofetch';
+import { useBeditaRecaptcha } from '../composables/useBeditaRecaptcha';
+import type { SignupBeditaBody } from '../types';
+import { RecaptchaActions } from '../utils/recaptcha-helpers';
+import { useRoute, useFetch } from '#imports';
+import type { AsyncData } from '#app';
 
 export const useBeditaSignup = () => {
   const { executeRecaptcha } = useBeditaRecaptcha();
@@ -15,16 +15,16 @@ export const useBeditaSignup = () => {
       method: 'POST',
       body: {
         ...data,
-        recaptcha_token
+        recaptcha_token,
       },
     });
   };
 
-  const signupActivation = (uuid?: string, server?: boolean): AsyncData<{ activated: true;} | null, FetchError<ApiResponseBodyError> | null> => {
+  const signupActivation = (uuid?: string, server?: boolean): AsyncData<{ activated: true } | null, FetchError<ApiResponseBodyError> | null> => {
     const route = useRoute();
 
     return useFetch('/api/bedita/signup/activation', {
-      method:'POST',
+      method: 'POST',
       body: { uuid: uuid || route.query?.uuid },
       server,
     });
@@ -34,4 +34,4 @@ export const useBeditaSignup = () => {
     signup,
     signupActivation,
   };
-}
+};

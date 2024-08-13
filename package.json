@@ -30,6 +30,7 @@
     "release:minor": "npm run lint && npm run prepack && changelogen --release --minor --push && npm publish --access public",
     "release:major": "npm run lint && npm run prepack && changelogen --release --major --push && npm publish --access public",
     "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "test": "vitest run",
     "test:watch": "vitest watch",
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
