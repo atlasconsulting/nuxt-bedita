@@ -5,7 +5,7 @@
     <div>
       Your roles are:
       <ul>
-        <li v-for="(role, index) in user.roles" :key="index">{{ role }}</li>
+        <li v-for="(role, index) in user!.roles" :key="index">{{ role }}</li>
       </ul>
     </div>
   </div>

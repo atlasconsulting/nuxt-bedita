@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
   modules: ['../src/module'],
+
   bedita: {
     apiBaseUrl: '',
     apiKey: '',
@@ -26,7 +27,17 @@ export default defineNuxtConfig({
         path: '/documents',
         methods: ['*'],
       },
+      {
+        path: '/files',
+        methods: ['GET'],
+      },
+      {
+        path: '/files/upload',
+        methods: ['POST'],
+      }
     ],
   },
-  devtools: { enabled: true }
+
+  devtools: { enabled: true },
+  compatibilityDate: '2024-08-12'
 })

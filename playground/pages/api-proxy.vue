@@ -24,6 +24,18 @@
         <button type="submit">Save</button>
       </form>
     </div>
+
+    <hr>
+
+    <div>
+      <h3>Upload file</h3>
+      <input type="file" name="file" @change="uploadFile">
+      <ul>
+        <li v-for="file, key in files" :key="key">
+          <a :href="file?.meta?.media_url" target="_blank">{{ file?.attributes?.title }}</a>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -35,6 +47,7 @@ import type { ApiResponseBodyList } from '@atlasconsulting/nuxt-bedita';
 const title = ref('');
 const editObject = ref<JsonApiResourceObject>();
 const docs = ref<JsonApiResourceObject[]>();
+const files = ref<JsonApiResourceObject[]>([]);
 
 const { data, error } = await useFetch<ApiResponseBodyList>('/api/bedita/documents');
 docs.value = data.value?.formattedData?.data as JsonApiResourceObject[] || [];
@@ -107,4 +120,28 @@ const deleteObj = async (id: string) => {
     console.error(e);
   }
 };
+
+const uploadFile = async (event: Event) => {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (!file) {
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await $fetch<ApiResponseBodyResource>(`/api/bedita/files/upload/${encodeURIComponent(file.name)}`, {
+      method: 'POST',
+      body: await file.arrayBuffer(),
+      headers: {
+        'Content-Type': file.type,
+      },
+    });
+
+    const r = await $fetch<ApiResponseBodyResource>(`/api/bedita/files/${response?.formattedData?.data?.id}`);
+    files.value.push(r?.formattedData?.data as JsonApiResourceObject);
+  } catch (e) {
+    console.error(e);
+  }
+}
 </script>
