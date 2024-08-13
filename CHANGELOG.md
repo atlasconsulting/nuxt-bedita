@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.4.0
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.8...v0.4.0)
+
+### 🩹 Fixes
+
+- Handle body in proxy upload ([21df7c1](https://github.com/atlasconsulting/nuxt-bedita/commit/21df7c1))
+- Wrong import type ([3a3cbb6](https://github.com/atlasconsulting/nuxt-bedita/commit/3a3cbb6))
+
+### 📖 Documentation
+
+- **playground:** Add example of upload ([859acc1](https://github.com/atlasconsulting/nuxt-bedita/commit/859acc1))
+
+### 🏡 Chore
+
+- **playground:** Fix configuration ([2b602ed](https://github.com/atlasconsulting/nuxt-bedita/commit/2b602ed))
+
+### 🎨 Styles
+
+- Eslint fix ([b56e99b](https://github.com/atlasconsulting/nuxt-bedita/commit/b56e99b))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.3.8
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.7...v0.3.8)
