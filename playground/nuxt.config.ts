@@ -24,12 +24,12 @@ export default defineNuxtConfig({
     },
     proxyEndpoints: [
       {
-        path: '/documents',
-        methods: ['*'],
+        path: '*',
+        methods: ['GET'],
       },
       {
-        path: '/files',
-        methods: ['GET'],
+        path: '/documents',
+        methods: ['*'],
       },
       {
         path: '/files/upload',
