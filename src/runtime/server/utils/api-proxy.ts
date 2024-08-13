@@ -1,5 +1,5 @@
 import { useRuntimeConfig } from '#imports';
-import { H3Event, readBody, getQuery, getHeader, setResponseStatus, createError, assertMethod, type HTTPMethod } from 'h3';
+import { H3Event, readBody, readRawBody, getQuery, getHeader, setResponseStatus, createError, assertMethod, type HTTPMethod } from 'h3';
 import type { ProxyEndpointConf } from '../../types';
 import { beditaApiClient } from './bedita-api-client';
 import type { BEditaClientRequestConfig } from '@atlasconsulting/bedita-sdk';
@@ -54,7 +54,8 @@ export const apiProxyRequest = async (event: H3Event) => {
   };
 
   if (event.method !== 'GET') {
-    options.data = await readBody(event);
+    const body = event.method === 'POST' && event.path.includes('/upload/') ? await readRawBody(event, false) : await readBody(event);
+    options.data = body;
     options.headers = {
       'Content-Type': getHeader(event, 'Content-Type'),
       'Content-Length': getHeader(event, 'Content-Length'),
