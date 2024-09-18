@@ -1,3 +1,4 @@
+import { createError } from 'h3';
 import { ofetch } from 'ofetch';
 import { isRecaptchaEnabled } from '../../utils/recaptcha-helpers';
 import type { RecaptchaResponse } from '../../types';
