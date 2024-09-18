@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.4.1
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.4.0...v0.4.1)
+
+### 🩹 Fixes
+
+- Add missing import for `createError` ([#33](https://github.com/atlasconsulting/nuxt-bedita/pull/33))
+
+### ❤️ Contributors
+
+- Stefano Rosanelli <stefano.rosanelli@gmail.com>
+
 ## v0.4.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.3.8...v0.4.0)

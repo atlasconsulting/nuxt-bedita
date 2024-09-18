@@ -1,6 +1,6 @@
 {
   "name": "@atlasconsulting/nuxt-bedita",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Nuxt module for BEdita API",
   "repository": {
     "type": "git",
