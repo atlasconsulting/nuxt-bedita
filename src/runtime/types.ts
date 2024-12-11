@@ -49,3 +49,38 @@ export type ProxyEndpointConf = {
   path: string;
   methods: ('GET' | 'POST' | 'PATCH' | 'DELETE' | '*')[];
 };
+
+export type BeditaProjectConf = {
+  apiBaseUrl: string;
+  apiKey: string;
+  replaceTranslations?: boolean;
+};
+
+export interface BeditaModuleOptions {
+  apiBaseUrl: string;
+  apiKey: string;
+  projects?: Record<string, BeditaProjectConf>;
+  auth: {
+    global?: boolean;
+    required?: boolean;
+    unauthenticatedRedirect?: string;
+    publicRoutes?: string[];
+    rolesGuard?: Record<string, string[]>;
+    sessionUserProps?: string[];
+  };
+  endpoints?: EndpointConf[];
+  proxyEndpoints?: ProxyEndpointConf[];
+  recaptcha: {
+    enabled: boolean;
+    siteKey?: string;
+    secretKey?: string;
+    hideBadge?: boolean;
+    useRecaptchaNet?: boolean;
+  };
+  replaceTranslations?: boolean;
+  resetPasswordPath?: string;
+  session: {
+    name: string;
+    secret: string;
+  };
+};

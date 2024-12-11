@@ -11,38 +11,9 @@ import {
 } from '@nuxt/kit';
 import { type NitroEventHandler } from 'nitropack';
 import { defu } from 'defu';
-import type { EndpointConf, ProxyEndpointConf } from './runtime/types';
+import type { BeditaModuleOptions, EndpointConf } from './runtime/types';
 
-// Module options TypeScript interface definition
-export interface ModuleOptions {
-  apiBaseUrl: string;
-  apiKey: string;
-  auth: {
-    global?: boolean;
-    required?: boolean;
-    unauthenticatedRedirect?: string;
-    publicRoutes?: string[];
-    rolesGuard?: Record<string, string[]>;
-    sessionUserProps?: string[];
-  };
-  endpoints?: EndpointConf[];
-  proxyEndpoints?: ProxyEndpointConf[];
-  recaptcha: {
-    enabled: boolean;
-    siteKey?: string;
-    secretKey?: string;
-    hideBadge?: boolean;
-    useRecaptchaNet?: boolean;
-  };
-  replaceTranslations?: boolean;
-  resetPasswordPath?: string;
-  session: {
-    name: string;
-    secret: string;
-  };
-}
-
-export default defineNuxtModule<ModuleOptions>({
+export default defineNuxtModule<BeditaModuleOptions>({
   meta: {
     name: '@atlasconsulting/nuxt-bedita',
     configKey: 'bedita',
@@ -85,12 +56,14 @@ export default defineNuxtModule<ModuleOptions>({
     runtimeConfig.bedita = defu(runtimeConfig.bedita || {}, {
       apiBaseUrl: options.apiBaseUrl,
       apiKey: options.apiKey,
+      projects: options?.projects || null,
       proxyEndpoints: options.proxyEndpoints || [{ path: '*', methods: ['GET'] }],
       recaptchaSecretKey: options.recaptcha.secretKey,
       replaceTranslations: options.replaceTranslations,
       resetPasswordPath: options.resetPasswordPath,
       session: options.session,
     });
+
     runtimeConfig.public = defu(runtimeConfig.public || {}, {
       bedita: {
         auth: {
@@ -221,6 +194,13 @@ export default defineNuxtModule<ModuleOptions>({
       },
     );
 
+    // Special API endpoint to setup project name.
+    // Useful working with multiple API projects (`bedita.projects` option).
+    endpointsEnabled.push({
+      route: '/api/bedita/_project',
+      handler: resolver.resolve('./runtime/server/api/bedita/_project.post'),
+    });
+
     endpointsEnabled.forEach((endpoint) => {
       addServerHandler(endpoint);
       const methodMatch = endpoint.handler.match(/\.(get|post|patch|delete)/);
@@ -273,7 +253,7 @@ export default defineNuxtModule<ModuleOptions>({
       getContents: () => [
         `declare module '@atlasconsulting/nuxt-bedita' {`,
         `  import('${resolver.resolve('./runtime/types')}')`,
-        `  export type { UserAuth, UserDataStore, ApiResponseBodyResource, ApiResponseBodyList, SignupBeditaBody } from '${resolver.resolve('./runtime/types')}'`,
+        `  export type { BeditaModuleOptions, UserAuth, UserDataStore, ApiResponseBodyResource, ApiResponseBodyList, SignupBeditaBody } from '${resolver.resolve('./runtime/types')}'`,
         `}`,
       ].join('\n'),
     });
