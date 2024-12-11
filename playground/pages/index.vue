@@ -5,6 +5,7 @@
       <pre>{{ user }}</pre>
     </div>
     <ul>
+      <li><NuxtLink to="/switch-project">Select BEdita project</NuxtLink></li>
       <li><NuxtLink to="/login">Login / Logout</NuxtLink></li>
       <li><NuxtLink to="/signup">Signup</NuxtLink></li>
       <li><NuxtLink to="/signup-activation">Signup Activation</NuxtLink></li>

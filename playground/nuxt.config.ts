@@ -1,9 +1,16 @@
 export default defineNuxtConfig({
   modules: ['../src/module'],
 
+  runtimeConfig: {
+    public: {
+      projects: ['project_1', 'project_2'], // in .env you should configure NUXT_BEDITA_PROJECTS with these keys
+    },
+  },
+
   bedita: {
     apiBaseUrl: '',
     apiKey: '',
+    projects: {},
     auth: {
       unauthenticatedRedirect: '/login',
       rolesGuard: {
