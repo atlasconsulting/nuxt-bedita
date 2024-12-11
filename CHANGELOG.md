@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.4.2
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.4.1...v0.4.2)
+
+### 🚀 Enhancements
+
+- Support multi project switching client between them ([#34](https://github.com/atlasconsulting/nuxt-bedita/pull/34))
+
+### 📖 Documentation
+
+- Documentation about switching API projects ([1c196f6](https://github.com/atlasconsulting/nuxt-bedita/commit/1c196f6))
+
+### 🏀 Examples
+
+- **playground:** Add example of switching projects ([517d7e8](https://github.com/atlasconsulting/nuxt-bedita/commit/517d7e8))
+- **chore:** Coding style in playground ([702ba5e](https://github.com/atlasconsulting/nuxt-bedita/commit/702ba5e))
+
+### 🤖 CI
+
+- Testwith  node 20 and 22 ([b6927c8](https://github.com/atlasconsulting/nuxt-bedita/commit/b6927c8))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.4.1
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.4.0...v0.4.1)
