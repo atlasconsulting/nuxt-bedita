@@ -1,8 +1,8 @@
 import { useBeditaAuth } from '../composables/useBeditaAuth';
-import { defineNuxtRouteMiddleware, useRuntimeConfig, navigateTo, abortNavigation, createError } from '#imports';
+import { defineNuxtRouteMiddleware, useRuntimeConfig, useRequestEvent, navigateTo, abortNavigation, createError } from '#imports';
 
 export default defineNuxtRouteMiddleware(async (to) => {
-  const config = useRuntimeConfig();
+  const config = import.meta.server ? useRuntimeConfig(useRequestEvent()) : useRuntimeConfig();
   const { user, isLogged } = useBeditaAuth();
 
   const redirectObject = {

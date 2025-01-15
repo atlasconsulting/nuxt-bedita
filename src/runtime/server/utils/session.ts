@@ -1,8 +1,8 @@
-import type { SessionConfig } from 'h3';
+import type { H3Event, SessionConfig } from 'h3';
 import { useRuntimeConfig } from '#imports';
 
-export const getSessionConfig = (): SessionConfig => {
-  const config = useRuntimeConfig();
+export const getSessionConfig = (event: H3Event): SessionConfig => {
+  const config = useRuntimeConfig(event);
 
   return {
     password: config.bedita.session.secret,

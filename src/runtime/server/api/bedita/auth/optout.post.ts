@@ -6,7 +6,7 @@ import { RecaptchaActions } from '../../../../utils/recaptcha-helpers';
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    await recaptchaVerifyToken(body.recaptcha_token, RecaptchaActions.OPTOUT);
+    await recaptchaVerifyToken(event, body.recaptcha_token, RecaptchaActions.OPTOUT);
     const client = await beditaApiClient(event);
     const response = await client.post('/auth/optout', {
       username: body.username,

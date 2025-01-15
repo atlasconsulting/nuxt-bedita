@@ -1,15 +1,15 @@
-import { createError } from 'h3';
+import { type H3Event, createError } from 'h3';
 import { ofetch } from 'ofetch';
 import { isRecaptchaEnabled } from '../../utils/recaptcha-helpers';
 import type { RecaptchaResponse } from '../../types';
 import { useRuntimeConfig } from '#imports';
 
-export const recaptchaVerifyToken = async (token: string, action: string, throwError = true): Promise<boolean> => {
-  if (!isRecaptchaEnabled()) {
+export const recaptchaVerifyToken = async (event: H3Event, token: string, action: string, throwError = true): Promise<boolean> => {
+  if (!isRecaptchaEnabled(event)) {
     return true;
   }
 
-  const config = useRuntimeConfig();
+  const config = useRuntimeConfig(event);
   const data: RecaptchaResponse = await ofetch('https://www.google.com/recaptcha/api/siteverify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

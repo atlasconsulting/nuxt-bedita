@@ -8,7 +8,7 @@ export default defineEventHandler(async (event): Promise<JsonApiResourceObject |
   try {
     const body = await readBody(event);
 
-    await recaptchaVerifyToken(body?.recaptcha_token, RecaptchaActions.SIGNUP);
+    await recaptchaVerifyToken(event, body?.recaptcha_token, RecaptchaActions.SIGNUP);
     const client = await beditaApiClient(event);
     const response = await client.post('/signup', body);
 

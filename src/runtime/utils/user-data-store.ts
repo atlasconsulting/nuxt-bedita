@@ -1,7 +1,8 @@
+import type { H3Event } from 'h3';
 import type { UserAuth, UserDataStore } from '../types';
 import { useRuntimeConfig } from '#imports';
 
-export const filterUserDataToStore = (data: UserAuth): UserDataStore => {
+export const filterUserDataToStore = (data: UserAuth, event?: H3Event): UserDataStore => {
   const userData: UserDataStore = {
     id: data?.data?.id,
     name: data?.data?.attributes?.name || null,
@@ -10,7 +11,7 @@ export const filterUserDataToStore = (data: UserAuth): UserDataStore => {
     email: data?.data?.attributes?.email || null,
     roles: data?.roles || [],
   };
-  for (const prop of useRuntimeConfig().public.bedita.auth?.sessionUserProps || []) {
+  for (const prop of useRuntimeConfig(event).public.bedita.auth?.sessionUserProps || []) {
     userData[prop] = data?.data?.attributes?.[prop] || data?.data?.meta?.[prop] || null;
   }
 

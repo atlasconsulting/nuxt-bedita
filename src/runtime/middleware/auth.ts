@@ -5,9 +5,11 @@ import { useBeditaAuth } from '../composables/useBeditaAuth';
 import { defineNuxtRouteMiddleware, useRequestEvent, useRuntimeConfig, navigateTo, abortNavigation, createError } from '#imports';
 
 export default defineNuxtRouteMiddleware(async (to) => {
+  let config = useRuntimeConfig();
   // SERVER SIDE: set user state from session data
   if (import.meta.server) {
     const event = useRequestEvent();
+    config = useRuntimeConfig(event); // ensure to pass event server side
     const client = await beditaApiClient(event);
     const userData: UserDataStore | null = await client.getStorageService().get('user');
 
@@ -16,8 +18,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
       user.value = userData;
     }
   }
-
-  const config = useRuntimeConfig();
 
   // public routes are always accessible
   if (config.public.bedita.auth.publicRoutes.includes(to.path)) {

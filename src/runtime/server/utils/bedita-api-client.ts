@@ -10,8 +10,8 @@ import { getSessionConfig } from './session';
 import { useRuntimeConfig } from '#imports';
 
 export const beditaApiClient = async (event: H3Event): Promise<BEditaApiClient> => {
-  const runtimeConfig = useRuntimeConfig();
-  const session = await useSession(event, getSessionConfig());
+  const runtimeConfig = useRuntimeConfig(event);
+  const session = await useSession(event, getSessionConfig(event));
   const config = getProjectConfig(session.data, runtimeConfig) as BeditaProjectConf;
   const client = new BEditaApiClient({
     baseUrl: config?.apiBaseUrl as string,
