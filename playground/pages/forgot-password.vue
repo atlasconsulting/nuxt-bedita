@@ -46,6 +46,7 @@ const send = async () => {
     done.value = true;
     email.value = '';
   } catch (e) {
+    console.log(e);
     error.value = true;
   }
   isLoading.value = false;

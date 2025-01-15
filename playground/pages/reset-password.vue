@@ -46,6 +46,7 @@ const change = async (login = false) => {
     done.value = true;
     password.value = '';
   } catch (e) {
+    console.log(e);
     error.value = true;
   }
   isLoading.value = false;

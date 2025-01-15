@@ -49,6 +49,7 @@ const save = async () => {
       surname: surname.value,
     });
   } catch (e) {
+    console.log(e);
     error.value = true;
   }
   isLoading.value = false;

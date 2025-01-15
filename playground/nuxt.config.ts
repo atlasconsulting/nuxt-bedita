@@ -1,11 +1,14 @@
 export default defineNuxtConfig({
   modules: ['../src/module'],
 
+  devtools: { enabled: true },
+
   runtimeConfig: {
     public: {
       projects: ['project_1', 'project_2'], // in .env you should configure NUXT_BEDITA_PROJECTS with these keys
     },
   },
+  compatibilityDate: '2024-08-12',
 
   bedita: {
     apiBaseUrl: '',
@@ -44,7 +47,4 @@ export default defineNuxtConfig({
       },
     ],
   },
-
-  devtools: { enabled: true },
-  compatibilityDate: '2024-08-12',
 });

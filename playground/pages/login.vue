@@ -50,6 +50,7 @@ const authenticate = async () => {
     await login(username.value, password.value);
     navigateTo(r.query?.redirect as string || '/');
   } catch (e) {
+    console.log(e);
     error.value = true;
   }
   isLoading.value = false;

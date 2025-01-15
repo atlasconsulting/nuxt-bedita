@@ -1,5 +1,5 @@
 import { defineEventHandler } from 'h3';
-import { type ApiResponseBodyError } from '@atlasconsulting/bedita-sdk';
+import type { ApiResponseBodyError } from '@atlasconsulting/bedita-sdk';
 import { apiProxyRequest } from '../../utils/api-proxy';
 import { handleBeditaApiError } from '../../utils/bedita-api-client';
 import type { ApiResponseBodyResource, ApiResponseBodyList } from '../../../types';

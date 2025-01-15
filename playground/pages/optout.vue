@@ -44,6 +44,7 @@ const deleteAccount = async () => {
   try {
     await optOut(username.value, password.value);
   } catch (e) {
+    console.log(e);
     error.value = true;
   }
   isLoading.value = false;

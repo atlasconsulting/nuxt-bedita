@@ -9,7 +9,7 @@ import {
   addTypeTemplate,
   addImports,
 } from '@nuxt/kit';
-import { type NitroEventHandler } from 'nitropack';
+import type { NitroEventHandler } from 'nitropack';
 import { defu } from 'defu';
 import type { BeditaModuleOptions, EndpointConf } from './runtime/types';
 

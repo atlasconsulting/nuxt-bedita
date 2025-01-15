@@ -1,5 +1,5 @@
 import { defineEventHandler, readBody } from 'h3';
-import { type ApiResponseBodyError, type JsonApiResourceObject } from '@atlasconsulting/bedita-sdk';
+import type { ApiResponseBodyError, JsonApiResourceObject } from '@atlasconsulting/bedita-sdk';
 import { recaptchaVerifyToken } from '../../../utils/recaptcha';
 import { beditaApiClient, handleBeditaApiError } from '../../../utils/bedita-api-client';
 import { RecaptchaActions } from '../../../../utils/recaptcha-helpers';

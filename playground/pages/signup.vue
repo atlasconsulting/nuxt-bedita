@@ -79,6 +79,7 @@ const submit = async () => {
     });
     done.value = true;
   } catch (e) {
+    console.log(e);
     error.value = true;
   }
   isLoading.value = false;
