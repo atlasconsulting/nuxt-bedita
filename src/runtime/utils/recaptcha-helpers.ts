@@ -1,3 +1,4 @@
+import type { H3Event } from 'h3';
 import { useRuntimeConfig } from '#imports';
 
 export const RecaptchaActions = {
@@ -8,6 +9,6 @@ export const RecaptchaActions = {
   OPTOUT: 'optout',
 } as const;
 
-export const isRecaptchaEnabled = () => {
-  return !!useRuntimeConfig().public.recaptcha.enabled === true;
+export const isRecaptchaEnabled = (event?: H3Event) => {
+  return !!useRuntimeConfig(event).public.recaptcha.enabled === true;
 };

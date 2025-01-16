@@ -9,7 +9,7 @@ import { filterUserDataToStore } from '../../../../utils/user-data-store';
 export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
-    await recaptchaVerifyToken(body?.recaptcha_token, RecaptchaActions.CHANGE_PASSWORD);
+    await recaptchaVerifyToken(event, body?.recaptcha_token, RecaptchaActions.CHANGE_PASSWORD);
     const client = await beditaApiClient(event);
     const payload = {
       uuid: body?.uuid,
@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
       const storageService = client.getStorageService();
       await storageService.setAccessToken(response.data?.meta?.jwt);
       await storageService.setRefreshToken(response.data?.meta?.renew);
-      await storageService.set('user', filterUserDataToStore(response?.formattedData));
+      await storageService.set('user', filterUserDataToStore(response?.formattedData, event));
     }
 
     return response.formattedData as UserAuth;

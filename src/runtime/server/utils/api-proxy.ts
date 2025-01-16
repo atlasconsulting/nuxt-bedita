@@ -4,8 +4,8 @@ import type { ProxyEndpointConf } from '../../types';
 import { beditaApiClient } from './bedita-api-client';
 import { useRuntimeConfig } from '#imports';
 
-const isEndpointAllowed = (path: string, method: HTTPMethod) => {
-  const config = useRuntimeConfig();
+const isEndpointAllowed = (event: H3Event, path: string, method: HTTPMethod) => {
+  const config = useRuntimeConfig(event);
   const allowedEndpoints: ProxyEndpointConf[] = (config.bedita.proxyEndpoints as ProxyEndpointConf[])
     .filter((e: ProxyEndpointConf) => e.methods.includes('*') || e.methods.includes(method as 'GET' | 'POST' | 'PATCH' | 'DELETE'));
 
@@ -21,13 +21,13 @@ export const getBeditaApiPath = (event: H3Event): string => {
   assertMethod(event, apiMethods);
 
   const path = event.path.replace(/^\/api\/bedita/, '') || '';
-  if (isEndpointAllowed(path, event.method)) {
+  if (isEndpointAllowed(event, path, event.method)) {
     return path;
   }
 
   const otherMethods = apiMethods.filter(method => method !== event.method);
   for (const method of otherMethods) {
-    if (isEndpointAllowed(path, method)) {
+    if (isEndpointAllowed(event, path, method)) {
       throw createError({
         statusCode: 405,
         statusMessage: 'Method Not Allowed',

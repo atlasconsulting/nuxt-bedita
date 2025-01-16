@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
       responseInterceptors: [new FormatUserInterceptor(client)],
     };
     const response = await client.patch('/auth/user', body, requestConfig);
-    await client.getStorageService().set('user', filterUserDataToStore(response?.formattedData));
+    await client.getStorageService().set('user', filterUserDataToStore(response?.formattedData, event));
 
     return response?.formattedData as UserAuth;
   } catch (error) {

@@ -35,6 +35,7 @@
           <a :href="file?.meta?.media_url" target="_blank">{{ file?.attributes?.title }}</a>
         </li>
       </ul>
+      {{ errorFile }}
     </div>
   </div>
 </template>
@@ -50,6 +51,9 @@ const files = ref<JsonApiResourceObject[]>([]);
 
 const { data, error } = await useFetch<ApiResponseBodyList>('/api/bedita/documents');
 docs.value = data.value?.formattedData?.data as JsonApiResourceObject[] || [];
+
+const { data: filedata, error: errorFile } = await useFetch<ApiResponseBodyList>('/api/bedita/files');
+files.value = filedata.value?.formattedData?.data as JsonApiResourceObject[] || [];
 
 const saveObj = async () => {
   try {

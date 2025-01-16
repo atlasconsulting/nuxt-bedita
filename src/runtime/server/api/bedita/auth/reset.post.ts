@@ -6,10 +6,10 @@ import { useRuntimeConfig } from '#imports';
 
 export default defineEventHandler(async (event) => {
   try {
-    const runtimeConfig = useRuntimeConfig();
+    const runtimeConfig = useRuntimeConfig(event);
     const resetUrl = `${getRequestURL(event).origin}${runtimeConfig.bedita.resetPasswordPath}`;
     const body = await readBody(event);
-    await recaptchaVerifyToken(body?.recaptcha_token, RecaptchaActions.RESET_PASSWORD);
+    await recaptchaVerifyToken(event, body?.recaptcha_token, RecaptchaActions.RESET_PASSWORD);
     const client = await beditaApiClient(event);
     await client.post('/auth/change', {
       contact: body?.contact,
