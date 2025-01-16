@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.5.0
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.4.2...v0.5.0)
+
+### 💅 Refactors
+
+- Pass event to useRuntimeConfig() in server side ([#35](https://github.com/atlasconsulting/nuxt-bedita/pull/35))
+
+### 🏡 Chore
+
+- Fix lint ([bac6b01](https://github.com/atlasconsulting/nuxt-bedita/commit/bac6b01))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.4.2
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.4.1...v0.4.2)
