@@ -46,7 +46,8 @@ export type SignupBeditaBody = {
 export type EndpointConf = 'auth' | 'signup';
 
 export type ProxyEndpointConf = {
-  path: string;
+  path?: string;
+  regExp?: string;
   methods: ('GET' | 'POST' | 'PATCH' | 'DELETE' | '*')[];
 };
 
