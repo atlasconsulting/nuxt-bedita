@@ -46,5 +46,6 @@ export default defineNuxtConfig({
         methods: ['POST'],
       },
     ],
+    removeLinksMember: true,
   },
 });

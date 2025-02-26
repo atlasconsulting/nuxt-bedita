@@ -1,4 +1,10 @@
-import { BEditaApiClient, MapIncludedInterceptor, type ApiResponseBodyError, type MapIncludedConfig } from '@atlasconsulting/bedita-sdk';
+import {
+  BEditaApiClient,
+  MapIncludedInterceptor,
+  RemoveLinksInterceptor,
+  type ApiResponseBodyError,
+  type MapIncludedConfig,
+} from '@atlasconsulting/bedita-sdk';
 import type { AxiosError } from 'axios';
 import { isAxiosError } from 'axios';
 import { type H3Event, setResponseStatus, useSession, H3Error, getQuery, type SessionData } from 'h3';
@@ -18,6 +24,10 @@ export const beditaApiClient = async (event: H3Event): Promise<BEditaApiClient> 
     apiKey: config?.apiKey as string,
     storageAdapter: new SessionStorageAdapter(session),
   });
+
+  if (config?.removeLinksMember) {
+    client.addInterceptor(new RemoveLinksInterceptor(client));
+  }
 
   const options: MapIncludedConfig = {};
   const lang = getQuery(event)?.lang;
