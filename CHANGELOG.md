@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.6.2
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.6.1...v0.6.2)
+
+### 🩹 Fixes
+
+- **deps:** Use bedita-sdk 3.2.2 ([b7570da](https://github.com/atlasconsulting/nuxt-bedita/commit/b7570da))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.6.1
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.6.0...v0.6.1)
