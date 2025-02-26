@@ -57,7 +57,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
       apiBaseUrl: options.apiBaseUrl,
       apiKey: options.apiKey,
       projects: options?.projects || null,
-      proxyEndpoints: options.proxyEndpoints || [{ path: '*', methods: ['GET'] }],
+      proxyEndpoints: options.proxyEndpoints || [{ regExp: '^/(?!users|profiles).*$', methods: ['GET'] }],
       recaptchaSecretKey: options.recaptcha.secretKey,
       replaceTranslations: options.replaceTranslations,
       resetPasswordPath: options.resetPasswordPath,

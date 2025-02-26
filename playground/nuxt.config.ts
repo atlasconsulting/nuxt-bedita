@@ -34,7 +34,7 @@ export default defineNuxtConfig({
     },
     proxyEndpoints: [
       {
-        path: '*',
+        regExp: '^/(?!users|profiles).*$',
         methods: ['GET'],
       },
       {
