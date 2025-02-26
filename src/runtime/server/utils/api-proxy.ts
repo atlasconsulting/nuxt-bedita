@@ -10,11 +10,11 @@ const isEndpointAllowed = (event: H3Event, path: string, method: HTTPMethod) => 
     .filter((e: ProxyEndpointConf) => e.methods.includes('*') || e.methods.includes(method as 'GET' | 'POST' | 'PATCH' | 'DELETE'));
 
   return allowedEndpoints.length && allowedEndpoints.filter((endpoint) => {
-    if (endpoint.path) {
+    if (endpoint?.path) {
       return endpoint.path === '*' || path.startsWith(endpoint.path);
     }
 
-    if (endpoint.regExp) {
+    if (endpoint?.regExp) {
       return new RegExp(endpoint.regExp).test(path);
     }
 
