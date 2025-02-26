@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v0.6.0
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.5.0...v0.6.0)
+
+### 🚀 Enhancements
+
+- ⚠️  Allow to configure proxy endpoints with regexp ([#37](https://github.com/atlasconsulting/nuxt-bedita/pull/37))
+
+### 🤖 CI
+
+- Update dependabot config ([#36](https://github.com/atlasconsulting/nuxt-bedita/pull/36))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Allow to configure proxy endpoints with regexp ([#37](https://github.com/atlasconsulting/nuxt-bedita/pull/37))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+- Dante Di Domenico ([@didoda](http://github.com/didoda))
+
 ## v0.5.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.4.2...v0.5.0)
