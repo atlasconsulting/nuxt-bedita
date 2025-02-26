@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.6.1
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.6.0...v0.6.1)
+
+### 🚀 Enhancements
+
+- Option to remove links from BEdita API response ([#38](https://github.com/atlasconsulting/nuxt-bedita/pull/38))
+
+### 📖 Documentation
+
+- Documentation for removeLinksMember ([4052c3d](https://github.com/atlasconsulting/nuxt-bedita/commit/4052c3d))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.6.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.5.0...v0.6.0)
