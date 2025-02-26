@@ -39,6 +39,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
       hideBadge: false,
       useRecaptchaNet: false,
     },
+    removeLinksMember: false,
     replaceTranslations: false,
     resetPasswordPath: '/reset-password',
     session: {
@@ -59,6 +60,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
       projects: options?.projects || null,
       proxyEndpoints: options.proxyEndpoints || [{ regExp: '^/(?!users|profiles).*$', methods: ['GET'] }],
       recaptchaSecretKey: options.recaptcha.secretKey,
+      removeLinksMember: options.removeLinksMember,
       replaceTranslations: options.replaceTranslations,
       resetPasswordPath: options.resetPasswordPath,
       session: options.session,

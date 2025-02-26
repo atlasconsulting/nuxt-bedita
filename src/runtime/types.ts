@@ -54,6 +54,7 @@ export type ProxyEndpointConf = {
 export type BeditaProjectConf = {
   apiBaseUrl: string;
   apiKey: string;
+  removeLinksMember?: boolean;
   replaceTranslations?: boolean;
 };
 
@@ -78,6 +79,7 @@ export interface BeditaModuleOptions {
     hideBadge?: boolean;
     useRecaptchaNet?: boolean;
   };
+  removeLinksMember?: boolean;
   replaceTranslations?: boolean;
   resetPasswordPath?: string;
   session: {
