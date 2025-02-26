@@ -36,7 +36,7 @@
     "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
   },
   "dependencies": {
-    "@atlasconsulting/bedita-sdk": "^3.2.1",
+    "@atlasconsulting/bedita-sdk": "^3.2.2",
     "defu": "^6.1.4",
     "h3": "^1.13.1",
     "ofetch": "^1.4.1"
