@@ -26,7 +26,7 @@ export const beditaApiClient = async (event: H3Event): Promise<BEditaApiClient> 
   });
 
   if (config?.removeLinksMember) {
-    client.addInterceptor(new RemoveLinksInterceptor(client));
+    client.addInterceptor(new RemoveLinksInterceptor());
   }
 
   const options: MapIncludedConfig = {};
