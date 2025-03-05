@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.6.3
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.6.2...v0.6.3)
+
+### 🩹 Fixes
+
+- Update bedita sdk to avoid errors removing links ([7f988f3](https://github.com/atlasconsulting/nuxt-bedita/commit/7f988f3))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](http://github.com/batopa))
+
 ## v0.6.2
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.6.1...v0.6.2)
