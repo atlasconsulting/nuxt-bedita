@@ -4,7 +4,7 @@ on:
   pull_request:
     types: [closed]
   push:
-    branches: [main]
+    branches: [main, next]
   workflow_dispatch:
     inputs:
       releaseType:
@@ -16,6 +16,18 @@ on:
           - patch
           - minor
           - major
+          - alpha
+          - beta
+          - rc
+      preReleaseAction:
+        description: The pre-release action to take
+        required: false
+        default: 'none'
+        type: choice
+        options:
+          - none
+          - pre-major
+          - pre-release
 
 jobs:
   debug:
@@ -30,11 +42,29 @@ jobs:
   release-on-push:
     if: github.event.pull_request.merged || inputs.releaseType != ''
     runs-on: 'ubuntu-latest'
+    env:
+      ALPHA_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'release:alpha') || inputs.releaseType == 'alpha' }}
+      BETA_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'release:beta') || inputs.releaseType == 'beta' }}
+      RC_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'release:rc') || inputs.releaseType == 'rc' }}
+      MAJOR_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'release:major') || (inputs.releaseType == 'major' || inputs.preReleaseAction == 'pre-major') }}
+      MINOR_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'release:minor') || inputs.releaseType == 'minor' }}
+      PATCH_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'release:patch') || inputs.releaseType == 'patch' }}
+      PRE_RELEASE: ${{ contains(github.event.pull_request.labels.*.name, 'release:alpha') || contains(github.event.pull_request.labels.*.name, 'release:beta') || contains(github.event.pull_request.labels.*.name, 'release:rc') || inputs.releaseType == 'alpha' || inputs.releaseType == 'beta' || inputs.releaseType == 'rc' || inputs.preReleaseAction == 'pre-release' }}
     steps:
       - name: Debug releaseType
         if: inputs.releaseType != ''
         run: |
           echo "RELEASE TYPE: ${{ inputs.releaseType }}"
+
+      - name: Debug variables
+        run: |
+          echo "ALPHA_RELEASE: ${{ env.ALPHA_RELEASE }}"
+          echo "BETA_RELEASE: ${{ env.BETA_RELEASE }}"
+          echo "RC_RELEASE: ${{ env.RC_RELEASE }}"
+          echo "MAJOR_RELEASE: ${{ env.MAJOR_RELEASE }}"
+          echo "MINOR_RELEASE: ${{ env.MINOR_RELEASE }}"
+          echo "PATCH_RELEASE: ${{ env.PATCH_RELEASE }}"
+          echo "PRE_RELEASE: ${{ env.PRE_RELEASE }}"
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -59,22 +89,64 @@ jobs:
         run: npm run dev:prepare
 
       - name: Major release
-        if: contains(github.event.pull_request.labels.*.name, 'release:major') || inputs.releaseType == 'major'
+        if: ${{ env.MAJOR_RELEASE == 'true' && env.PRE_RELEASE == 'false' }}
         run: npm run release:major
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Minor release
-        if: contains(github.event.pull_request.labels.*.name, 'release:minor') || inputs.releaseType == 'minor'
+        if: ${{ env.MINOR_RELEASE == 'true' && env.PRE_RELEASE == 'false' }}
         run: npm run release:minor
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Patch release
-        if: contains(github.event.pull_request.labels.*.name, 'release:patch') || inputs.releaseType == 'patch'
+        if: ${{ env.PATCH_RELEASE == 'true' && env.PRE_RELEASE == 'false' }}
         run: npm run release:patch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Premajor alpha release
+        if: ${{ env.ALPHA_RELEASE == 'true' && env.MAJOR_RELEASE == 'true' }}
+        run: npm run release:alpha
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Prerelease alpha
+        if: ${{ env.ALPHA_RELEASE == 'true' && env.MAJOR_RELEASE == 'false' && env.PRE_RELEASE == 'true' }}
+        run: npm run pre-release:alpha
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Premajor beta release
+        if: ${{ env.BETA_RELEASE == 'true' && env.MAJOR_RELEASE == 'true' }}
+        run: npm run release:beta
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Prerelease beta
+        if: ${{ env.BETA_RELEASE == 'true' && env.MAJOR_RELEASE == 'false' && env.PRE_RELEASE == 'true' }}
+        run: npm run pre-release:beta
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Premajor rc release
+        if: ${{ env.RC_RELEASE == 'true' && env.MAJOR_RELEASE == 'true' }}
+        run: npm run release:rc
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Prerelease rc
+        if: ${{ env.RC_RELEASE == 'true' && env.MAJOR_RELEASE == 'false' && env.PRE_RELEASE == 'true' }}
+        run: npm run pre-release:rc
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
