@@ -206,7 +206,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
     endpointsEnabled.forEach((endpoint) => {
       addServerHandler(endpoint);
       const methodMatch = endpoint.handler.match(/\.(get|post|patch|delete)/);
-      const method = methodMatch ? `${methodMatch[1].toUpperCase()} ` : '';
+      const method = methodMatch && methodMatch?.[1] ? `${methodMatch[1].toUpperCase()} ` : '';
       logger.info(`API endpoint ${method}${endpoint.route} added.`);
     });
 
