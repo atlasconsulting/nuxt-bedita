@@ -1,6 +1,34 @@
 # Changelog
 
 
+## v1.0.0-alpha.0
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.6.3...v1.0.0-alpha.0)
+
+### 🚀 Enhancements
+
+- Support nuxt4 ([#40](https://github.com/atlasconsulting/nuxt-bedita/pull/40))
+
+### 🩹 Fixes
+
+- Better check on endpoints enabled info logged ([dca7a01](https://github.com/atlasconsulting/nuxt-bedita/commit/dca7a01))
+
+### 📖 Documentation
+
+- Add info about Nuxt 4 ([3490a00](https://github.com/atlasconsulting/nuxt-bedita/commit/3490a00))
+
+### 📦 Build
+
+- Update package.json for  compatibility with @nuxt/module-builder ([03d0833](https://github.com/atlasconsulting/nuxt-bedita/commit/03d0833))
+
+### 🤖 CI
+
+- Handle pre-release ([#39](https://github.com/atlasconsulting/nuxt-bedita/pull/39))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+
 ## v0.6.3
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.6.2...v0.6.3)
