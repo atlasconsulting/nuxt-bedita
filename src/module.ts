@@ -18,7 +18,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
     name: '@atlasconsulting/nuxt-bedita',
     configKey: 'bedita',
     compatibility: {
-      nuxt: '^3.0.0',
+      nuxt: '>=3.18.0',
     },
   },
 
