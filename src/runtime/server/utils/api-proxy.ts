@@ -67,6 +67,7 @@ export const apiProxyRequest = async (event: H3Event) => {
     const body = event.method === 'POST' && event.path.includes('/upload/') ? await readRawBody(event, false) : await readBody(event);
     options.data = body;
     options.headers = {
+      'Accept': getHeader(event, 'Accept'),
       'Content-Type': getHeader(event, 'Content-Type'),
       'Content-Length': getHeader(event, 'Content-Length'),
     };
