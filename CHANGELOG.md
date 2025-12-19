@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.0.0-alpha.2
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.1...v1.0.0-alpha.2)
+
+### 🤖 CI
+
+- Fix npm publish ([50533f6](https://github.com/atlasconsulting/nuxt-bedita/commit/50533f6))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+
 ## v1.0.0-alpha.1
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.0...v1.0.0-alpha.1)
