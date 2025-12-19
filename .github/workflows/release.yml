@@ -29,6 +29,10 @@ on:
           - pre-major
           - pre-release
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write
+
 jobs:
   debug:
     if: github.event.pull_request.merged
