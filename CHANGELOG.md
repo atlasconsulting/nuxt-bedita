@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v1.0.0-alpha.1
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.0...v1.0.0-alpha.1)
+
+### 🩹 Fixes
+
+- Add 'Accept' header to proxy request options ([#47](https://github.com/atlasconsulting/nuxt-bedita/pull/47))
+
+### 📦 Build
+
+- **deps:** Bump actions/checkout from 4 to 5 in the gh-actions group ([#41](https://github.com/atlasconsulting/nuxt-bedita/pull/41))
+- **deps:** Bump actions/upload-pages-artifact in the gh-actions group ([#42](https://github.com/atlasconsulting/nuxt-bedita/pull/42))
+- **deps:** Bump actions/setup-node from 4 to 5 in the gh-actions group ([#43](https://github.com/atlasconsulting/nuxt-bedita/pull/43))
+- **deps:** Bump actions/setup-node from 5 to 6 in the gh-actions group ([#44](https://github.com/atlasconsulting/nuxt-bedita/pull/44))
+- **deps:** Bump actions/checkout from 5 to 6 in the gh-actions group ([#45](https://github.com/atlasconsulting/nuxt-bedita/pull/45))
+
+### 🤖 CI
+
+- Update release workflow for support oidc ([acd457e](https://github.com/atlasconsulting/nuxt-bedita/commit/acd457e))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+- Stefano Rosanelli <stefano.rosanelli@gmail.com>
+
 ## v1.0.0-alpha.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v0.6.3...v1.0.0-alpha.0)
