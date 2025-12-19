@@ -72,6 +72,15 @@ export const apiProxyRequest = async (event: H3Event) => {
     };
   }
 
+  // add Accept header only if specified by client
+  const accept = getHeader(event, 'Accept');
+  if (accept && accept !== '*/*') {
+    options.headers = {
+      ...(options.headers || {}),
+      Accept: accept,
+    };
+  }
+
   const client = await beditaApiClient(event);
   const response = await client.request(options);
   setResponseStatus(event, response.status);
