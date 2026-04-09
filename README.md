@@ -78,6 +78,16 @@ That's it! You can now use BEdita Nuxt module in your Nuxt app ✨
 
 See [documentation](https://atlasconsulting.github.io/nuxt-bedita).
 
+### SDK re-export
+
+`@atlasconsulting/nuxt-bedita` re-exports everything from `@atlasconsulting/bedita-sdk`, so you can import SDK utilities directly from the Nuxt module package:
+
+```ts
+import { BeditaClient } from '@atlasconsulting/nuxt-bedita'
+```
+
+This allows using a single package import for both the Nuxt module and SDK symbols.
+
 ## Development
 
 ```bash
