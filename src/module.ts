@@ -256,9 +256,11 @@ export default defineNuxtModule<BeditaModuleOptions>({
         `declare module '@atlasconsulting/nuxt-bedita' {`,
         `  import('${resolver.resolve('./runtime/types')}')`,
         `  export type { BeditaModuleOptions, UserAuth, UserDataStore, ApiResponseBodyResource, ApiResponseBodyList, SignupBeditaBody } from '${resolver.resolve('./runtime/types')}'`,
+        `  export * from '@atlasconsulting/bedita-sdk'`,
+        `  export {}`,
         `}`,
       ].join('\n'),
-    });
+    }, { shared: true, nuxt: true, nitro: true });
 
     logger.success('nuxt-bedita ready');
   },

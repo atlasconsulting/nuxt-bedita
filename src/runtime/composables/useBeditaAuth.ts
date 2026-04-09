@@ -36,7 +36,7 @@ export const useBeditaAuth = () => {
   const resetPassword = async (contact: string) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.RESET_PASSWORD);
 
-    return await $fetch('/api/bedita/auth/reset', {
+    return await $fetch<unknown>('/api/bedita/auth/reset', {
       method: 'POST',
       body: {
         contact,
@@ -69,7 +69,7 @@ export const useBeditaAuth = () => {
   const optOut = async (username: string, password: string) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.OPTOUT);
 
-    return await $fetch('/api/bedita/auth/optout', {
+    return await $fetch<unknown>('/api/bedita/auth/optout', {
       method: 'POST',
       body: {
         username,

@@ -49,15 +49,15 @@ const editObject = ref<JsonApiResourceObject>();
 const docs = ref<JsonApiResourceObject[]>();
 const files = ref<JsonApiResourceObject[]>([]);
 
-const { data, error } = await useFetch<ApiResponseBodyList>('/api/bedita/documents');
+const { data, error } = await useFetch<ApiResponseBodyList<JsonApiResourceObject>>('/api/bedita/documents');
 docs.value = data.value?.formattedData?.data as JsonApiResourceObject[] || [];
 
-const { data: filedata, error: errorFile } = await useFetch<ApiResponseBodyList>('/api/bedita/files');
-files.value = filedata.value?.formattedData?.data as JsonApiResourceObject[] || [];
+const { data: filedata, error: errorFile } = await useFetch<ApiResponseBodyList<JsonApiResourceObject>>('/api/bedita/files');
+files.value = filedata.value?.formattedData?.data || [];
 
 const saveObj = async () => {
   try {
-    const response = await $fetch<ApiResponseBodyResource>('/api/bedita/documents', {
+    const response = await $fetch<ApiResponseBodyResource<JsonApiResourceObject>>('/api/bedita/documents', {
       method: 'POST',
       body: {
         data: {
@@ -114,7 +114,7 @@ const editObj = async (e: Event) => {
 
 const deleteObj = async (id: string) => {
   try {
-    await $fetch(`/api/bedita/documents/${id}`, {
+    await $fetch<unknown>(`/api/bedita/documents/${id}`, {
       method: 'DELETE',
     });
 
