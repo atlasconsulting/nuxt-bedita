@@ -4,7 +4,6 @@ import { useBeditaRecaptcha } from '../composables/useBeditaRecaptcha';
 import type { SignupBeditaBody } from '../types';
 import { RecaptchaActions } from '../utils/recaptcha-helpers';
 import { useRoute, useFetch } from '#imports';
-import type { AsyncData } from '#app';
 
 export const useBeditaSignup = () => {
   const { executeRecaptcha } = useBeditaRecaptcha();
@@ -20,10 +19,10 @@ export const useBeditaSignup = () => {
     });
   };
 
-  const signupActivation = (uuid?: string, server?: boolean): AsyncData<{ activated: true } | null, FetchError<ApiResponseBodyError> | null> => {
+  const signupActivation = (uuid?: string, server?: boolean) => {
     const route = useRoute();
 
-    return useFetch('/api/bedita/signup/activation', {
+    return useFetch<{ activated: true } | null, FetchError<ApiResponseBodyError>>('/api/bedita/signup/activation', {
       method: 'POST',
       body: { uuid: uuid || route.query?.uuid },
       server,

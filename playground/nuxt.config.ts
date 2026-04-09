@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       projects: ['project_1', 'project_2'], // in .env you should configure NUXT_BEDITA_PROJECTS with these keys
     },
   },
-  compatibilityDate: '2024-08-12',
+  compatibilityDate: 'latest',
 
   bedita: {
     apiBaseUrl: '',
