@@ -8,7 +8,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
   let config = useRuntimeConfig();
   // SERVER SIDE: set user state from session data
   if (import.meta.server) {
-    const event = useRequestEvent();
+    const event = useRequestEvent()!;
     config = useRuntimeConfig(event); // ensure to pass event server side
     const client = await beditaApiClient(event);
     const userData: UserDataStore | null = await client.getStorageService().get('user');
@@ -50,7 +50,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
 
   // if user has at least a role for the guard, then user is authorized
   // '*' means any role is authorized
-  if (rolesGuards[protectedRoute].some(role => role === '*' || user.value?.roles.includes(role))) {
+  if (rolesGuards[protectedRoute]?.some(role => role === '*' || user.value?.roles.includes(role))) {
     return;
   }
 
