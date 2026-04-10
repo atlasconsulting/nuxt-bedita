@@ -74,7 +74,7 @@ export const apiProxyRequest = async (event: H3Event) => {
 
   // add Accept header only if specified by client
   const accept = getHeader(event, 'Accept');
-  if (accept && accept !== '*/*') {
+  if (accept && accept.search(/\*\/\*/) === -1) {
     options.headers = {
       ...(options.headers || {}),
       Accept: accept,
