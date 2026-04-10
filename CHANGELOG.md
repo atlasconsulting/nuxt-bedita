@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.0-alpha.3
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.2...v1.0.0-alpha.3)
+
+### 🩹 Fixes
+
+- Set accept header in api proxy ([#49](https://github.com/atlasconsulting/nuxt-bedita/pull/49))
+
+### 📦 Build
+
+- **deps:** Bump actions/deploy-pages in the gh-actions group ([#48](https://github.com/atlasconsulting/nuxt-bedita/pull/48))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+
 ## v1.0.0-alpha.2
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.1...v1.0.0-alpha.2)
