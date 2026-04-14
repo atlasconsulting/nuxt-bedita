@@ -1,4 +1,4 @@
-import type { ApiResponseBodyOk, JsonApiResourceObject } from '@atlasconsulting/bedita-sdk';
+import type { ApiResponseBodyOk, JsonApiResourceObject, JsonApiResourceFlat } from '@atlasconsulting/bedita-sdk';
 
 export type UserAuth = {
   data: JsonApiResourceObject & { id: string };
@@ -14,15 +14,15 @@ export type UserDataStore = {
   roles: string[];
 } & Record<string, any>;
 
-export interface ApiResponseBodyResource extends ApiResponseBodyOk {
+export interface ApiResponseBodyResource<T = JsonApiResourceObject | JsonApiResourceFlat | Record<string, any>> extends ApiResponseBodyOk {
   formattedData?: {
-    data: JsonApiResourceObject | Record<string, any>;
+    data: T;
   };
 }
 
-export interface ApiResponseBodyList extends ApiResponseBodyOk {
+export interface ApiResponseBodyList<T = JsonApiResourceObject | JsonApiResourceFlat | Record<string, any>> extends ApiResponseBodyOk {
   formattedData?: {
-    data: JsonApiResourceObject[] | Record<string, any>[];
+    data: T[];
   };
 }
 
