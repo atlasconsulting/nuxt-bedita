@@ -219,7 +219,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
       name: 'beditaAuth',
       path: resolver.resolve('./runtime/middleware/auth'),
       global: options.auth.global,
-    });
+    }, { prepend: true });
     addRouteMiddleware({
       name: 'beditaRolesGuard',
       path: resolver.resolve('./runtime/middleware/roles-guard'),
