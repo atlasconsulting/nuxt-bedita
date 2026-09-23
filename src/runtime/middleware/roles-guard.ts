@@ -15,7 +15,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return navigateTo(redirectObject);
   }
 
-  const allowedRoles = to?.meta?.beditaRolesGuard?.roles || [];
+  const beditaRolesGuard = to?.meta?.beditaRolesGuard as { roles?: string[] } | undefined;
+  const allowedRoles = beditaRolesGuard?.roles || [];
   if (!Array.isArray(allowedRoles)) {
     return abortNavigation(
       createError({
