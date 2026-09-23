@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v1.0.0-alpha.4
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.3...v1.0.0-alpha.4)
+
+### 🩹 Fixes
+
+- Ensure that auth middleware is prepended to app middlewares ([3cee107](https://github.com/atlasconsulting/nuxt-bedita/commit/3cee107))
+
+### 📦 Build
+
+- **deps:** Bump actions/upload-pages-artifact in the gh-actions group ([#50](https://github.com/atlasconsulting/nuxt-bedita/pull/50))
+- **deps:** Bump the gh-actions group across 1 directory with 2 updates ([#53](https://github.com/atlasconsulting/nuxt-bedita/pull/53))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+
 ## v1.0.0-alpha.3
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.2...v1.0.0-alpha.3)
