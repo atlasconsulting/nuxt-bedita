@@ -29,7 +29,9 @@ export const beditaApiClient = async (event: H3Event): Promise<BEditaApiClient> 
     client.addInterceptor(new RemoveLinksInterceptor());
   }
 
-  const options: MapIncludedConfig = {};
+  const options: MapIncludedConfig = {
+    flatten: config?.flattenResources || false,
+  };
   const lang = getQuery(event)?.lang;
   if (config?.replaceTranslations && lang) {
     options.replaceWithTranslation = lang as string;

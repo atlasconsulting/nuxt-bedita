@@ -54,6 +54,7 @@ export type ProxyEndpointConf = {
 export type BeditaProjectConf = {
   apiBaseUrl: string;
   apiKey: string;
+  flattenResources?: boolean;
   removeLinksMember?: boolean;
   replaceTranslations?: boolean;
 };
@@ -71,6 +72,7 @@ export interface BeditaModuleOptions {
     sessionUserProps?: string[];
   };
   endpoints?: EndpointConf[];
+  flattenResources?: boolean;
   proxyEndpoints?: ProxyEndpointConf[];
   recaptcha: {
     enabled: boolean;

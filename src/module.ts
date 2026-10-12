@@ -34,6 +34,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
       rolesGuard: {},
       sessionUserProps: [],
     },
+    flattenResources: false,
     recaptcha: {
       enabled: false,
       hideBadge: false,
@@ -59,6 +60,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
       apiKey: options.apiKey,
       projects: options?.projects || null,
       proxyEndpoints: options.proxyEndpoints || [{ regExp: '^/(?!users|profiles).*$', methods: ['GET'] }],
+      flattenResources: options.flattenResources,
       recaptchaSecretKey: options.recaptcha.secretKey,
       removeLinksMember: options.removeLinksMember,
       replaceTranslations: options.replaceTranslations,
