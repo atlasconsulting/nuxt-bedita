@@ -26,13 +26,13 @@ Nuxt module for [BEdita API](https://github.com/bedita/bedita).
 
 ```bash
 # Using pnpm
-pnpm add -D @atlasconsulting/nuxt-bedita
-
-# Using yarn
-yarn add --dev @atlasconsulting/nuxt-bedita
+pnpm add @atlasconsulting/nuxt-bedita
 
 # Using npm
-npm install --save-dev @atlasconsulting/nuxt-bedita
+npm install @atlasconsulting/nuxt-bedita
+
+# Using yarn
+yarn add @atlasconsulting/nuxt-bedita
 ```
 
 2. Add `@atlasconsulting/nuxt-bedita` to the `modules` section of `nuxt.config.ts`.
