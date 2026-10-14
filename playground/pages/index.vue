@@ -14,6 +14,7 @@
       <li><NuxtLink to="/admin">Use of <code>beditaRolesGuard</code> middleware</NuxtLink></li>
       <li><NuxtLink to="/optout">Opt-out</NuxtLink></li>
       <li><NuxtLink to="/api-proxy">BEdita API proxy page</NuxtLink></li>
+      <li><NuxtLink to="/flatten">Flattened documents</NuxtLink></li>
     </ul>
   </div>
 </template>
