@@ -19,10 +19,10 @@ import { useRuntimeConfig } from '#imports';
 export const beditaApiClient = async (event: H3Event, clientConfig?: Partial<BeditaProjectConf> & Partial<ApiClientConfig>): Promise<BEditaApiClient> => {
   const runtimeConfig = useRuntimeConfig(event);
   const session = await useSession(event, getSessionConfig(event));
-  const config = defu(clientConfig, getProjectConfig(session.data, runtimeConfig) as BeditaProjectConf);
+  const config = defu(clientConfig, getProjectConfig(session.data, runtimeConfig));
   const client = new BEditaApiClient({
-    baseUrl: config.apiBaseUrl as string,
-    apiKey: config.apiKey as string,
+    baseUrl: config.apiBaseUrl,
+    apiKey: config.apiKey,
     storageAdapter: new SessionStorageAdapter(session),
   });
 
@@ -43,12 +43,14 @@ export const beditaApiClient = async (event: H3Event, clientConfig?: Partial<Bed
   return client;
 };
 
-export const getProjectConfig = (sessionData: SessionData, config: RuntimeConfig, property?: keyof BeditaProjectConf) => {
+export function getProjectConfig(sessionData: SessionData, config: RuntimeConfig): BeditaProjectConf;
+export function getProjectConfig<K extends keyof BeditaProjectConf>(sessionData: SessionData, config: RuntimeConfig, property: K): BeditaProjectConf[K];
+export function getProjectConfig(sessionData: SessionData, config: RuntimeConfig, property?: keyof BeditaProjectConf) {
   const projectConfig = (config.bedita?.projects?.[sessionData?._project] || {}) as BeditaProjectConf;
-  const beditaConfig = defu(projectConfig, config.bedita);
+  const beditaConfig = defu(projectConfig, config.bedita) as BeditaProjectConf;
 
-  return property ? beditaConfig?.[property] : beditaConfig;
-};
+  return property ? beditaConfig[property] : beditaConfig;
+}
 
 export const handleBeditaApiError = async (event: H3Event, error: AxiosError | H3Error | any): Promise<ApiResponseBodyError> => {
   if (isAxiosError(error) && error?.response) {
