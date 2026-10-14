@@ -22,23 +22,26 @@
 
       <h2>Stored session user</h2>
       <pre>{{ user }}</pre>
+
+      <h2>Complete user data</h2>
+      <p v-if="isUserDataLoading">Loading complete user data...</p>
+      <p v-if="userDataError" style="color: red;">{{ userDataError }}</p>
+      <pre>{{ userData }}</pre>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { ApiResponseBodyResource } from '@atlasconsulting/nuxt-bedita';
-
-const { user, isLogged, updateUser } = useBeditaAuth();
+const { user, isLogged, updateUser, fetchUserData } = useBeditaAuth();
 const name = ref();
 const surname = ref();
 const error = ref(false);
 const isLoading = ref(false);
 
 // load complete user data
-const { data: userData } = await useFetch<ApiResponseBodyResource>('/api/bedita/auth/user');
-name.value = userData.value?.formattedData?.data?.attributes.name;
-surname.value = userData.value?.formattedData?.data?.attributes.surname;
+const { data: userData, pending: isUserDataLoading, error: userDataError } = await useAsyncData('user-complete-data', () => fetchUserData());
+name.value = userData.value?.attributes?.name;
+surname.value = userData.value?.attributes?.surname;
 
 const save = async () => {
   error.value = false;
