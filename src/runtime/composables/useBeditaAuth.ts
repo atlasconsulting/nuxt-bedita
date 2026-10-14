@@ -1,9 +1,10 @@
 import { useBeditaRecaptcha } from '../composables/useBeditaRecaptcha';
 import { useUserState } from '../states/user';
-import type { UserAuth, UserDataStore } from '../types';
+import type { ApiResponseBodyResource, UserAuth, UserDataStore } from '../types';
 import { filterUserDataToStore } from '../utils/user-data-store';
 import { RecaptchaActions } from '../utils/recaptcha-helpers';
-import { computed, type ComputedRef, useRoute, type Ref } from '#imports';
+import { computed, type ComputedRef, useRoute, type Ref, useRequestFetch } from '#imports';
+import type { JsonApiResourceObject } from '@atlasconsulting/nuxt-bedita';
 
 export const useBeditaAuth = () => {
   const user: Ref<UserDataStore | null> = useUserState();
@@ -11,6 +12,7 @@ export const useBeditaAuth = () => {
   const isLogged: ComputedRef<boolean> = computed<boolean>(() => user.value !== null);
 
   const { executeRecaptcha } = useBeditaRecaptcha();
+  const requestFetch = useRequestFetch();
 
   const login = async (username: string, password: string) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.LOGIN);
@@ -90,6 +92,14 @@ export const useBeditaAuth = () => {
     return data;
   };
 
+  async function fetchUserData<T = JsonApiResourceObject>(include?: string[]) {
+    const data = await requestFetch<ApiResponseBodyResource<T>>('/api/bedita/auth/user', {
+      query: include ? { include: include.join(',') } : {},
+    });
+
+    return data.formattedData!.data;
+  }
+
   return {
     user,
     isLogged,
@@ -99,5 +109,6 @@ export const useBeditaAuth = () => {
     changePassword,
     optOut,
     updateUser,
+    fetchUserData,
   };
 };
