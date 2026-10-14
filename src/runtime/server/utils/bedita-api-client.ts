@@ -2,6 +2,7 @@ import {
   BEditaApiClient,
   MapIncludedInterceptor,
   RemoveLinksInterceptor,
+  type ApiClientConfig,
   type ApiResponseBodyError,
   type MapIncludedConfig,
 } from '@atlasconsulting/bedita-sdk';
@@ -15,25 +16,25 @@ import type { BeditaProjectConf } from '../../types';
 import { getSessionConfig } from './session';
 import { useRuntimeConfig } from '#imports';
 
-export const beditaApiClient = async (event: H3Event): Promise<BEditaApiClient> => {
+export const beditaApiClient = async (event: H3Event, clientConfig?: Partial<BeditaProjectConf> & Partial<ApiClientConfig>): Promise<BEditaApiClient> => {
   const runtimeConfig = useRuntimeConfig(event);
   const session = await useSession(event, getSessionConfig(event));
-  const config = getProjectConfig(session.data, runtimeConfig) as BeditaProjectConf;
+  const config = defu(clientConfig, getProjectConfig(session.data, runtimeConfig) as BeditaProjectConf);
   const client = new BEditaApiClient({
-    baseUrl: config?.apiBaseUrl as string,
-    apiKey: config?.apiKey as string,
+    baseUrl: config.apiBaseUrl as string,
+    apiKey: config.apiKey as string,
     storageAdapter: new SessionStorageAdapter(session),
   });
 
-  if (config?.removeLinksMember) {
+  if (config.removeLinksMember) {
     client.addInterceptor(new RemoveLinksInterceptor());
   }
 
   const options: MapIncludedConfig = {
-    flatten: config?.flattenResources || false,
+    flatten: config.flattenResources || false,
   };
   const lang = getQuery(event)?.lang;
-  if (config?.replaceTranslations && lang) {
+  if (config.replaceTranslations && lang) {
     options.replaceWithTranslation = lang as string;
   }
 
