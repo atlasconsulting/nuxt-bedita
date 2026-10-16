@@ -1,9 +1,12 @@
 import { useBeditaRecaptcha } from '../composables/useBeditaRecaptcha';
 import { useUserState } from '../states/user';
-import type { UserAuth, UserDataStore } from '../types';
+import type { ApiResponseBodyResource, UserAuth, UserDataStore } from '../types';
 import { filterUserDataToStore } from '../utils/user-data-store';
 import { RecaptchaActions } from '../utils/recaptcha-helpers';
-import { computed, type ComputedRef, useRoute, type Ref } from '#imports';
+import { computed, type ComputedRef, useRoute, type Ref, useRequestFetch, useAsyncData } from '#imports';
+import type { AsyncDataOptions } from 'nuxt/app';
+import type { JsonApiResourceFlat, JsonApiResourceObject } from '@atlasconsulting/nuxt-bedita';
+import type { NitroFetchOptions } from 'nitropack';
 
 export const useBeditaAuth = () => {
   const user: Ref<UserDataStore | null> = useUserState();
@@ -11,6 +14,7 @@ export const useBeditaAuth = () => {
   const isLogged: ComputedRef<boolean> = computed<boolean>(() => user.value !== null);
 
   const { executeRecaptcha } = useBeditaRecaptcha();
+  const requestFetch = useRequestFetch();
 
   const login = async (username: string, password: string) => {
     const recaptcha_token = await executeRecaptcha(RecaptchaActions.LOGIN);
@@ -90,6 +94,26 @@ export const useBeditaAuth = () => {
     return data;
   };
 
+  async function $fetchUser<T extends JsonApiResourceObject | JsonApiResourceFlat = JsonApiResourceObject>(
+    options: Omit<NitroFetchOptions<'/api/bedita/auth/user'>, 'baseURL' | 'method'> = {},
+  ) {
+    const data = await requestFetch<ApiResponseBodyResource<T>>('/api/bedita/auth/user', options);
+
+    return data.formattedData!.data;
+  }
+
+  function useFetchUser<T extends JsonApiResourceObject | JsonApiResourceFlat = JsonApiResourceObject>(
+    fetchOptions: Omit<NitroFetchOptions<'/api/bedita/auth/user'>, 'baseURL' | 'method'> = {},
+    asyncDataOptions: AsyncDataOptions<T> = {},
+  ) {
+    const key = `fetch:user:${JSON.stringify(fetchOptions.query)}`;
+    return useAsyncData<T>(
+      key,
+      (_nuxtApp, { signal }) => $fetchUser<T>({ ...fetchOptions, signal }),
+      asyncDataOptions,
+    );
+  }
+
   return {
     user,
     isLogged,
@@ -99,5 +123,7 @@ export const useBeditaAuth = () => {
     changePassword,
     optOut,
     updateUser,
+    $fetchUser,
+    useFetchUser,
   };
 };
