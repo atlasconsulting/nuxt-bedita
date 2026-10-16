@@ -3,8 +3,10 @@ import { useUserState } from '../states/user';
 import type { ApiResponseBodyResource, UserAuth, UserDataStore } from '../types';
 import { filterUserDataToStore } from '../utils/user-data-store';
 import { RecaptchaActions } from '../utils/recaptcha-helpers';
-import { computed, type ComputedRef, useRoute, type Ref, useRequestFetch } from '#imports';
-import type { JsonApiResourceObject } from '@atlasconsulting/nuxt-bedita';
+import { computed, type ComputedRef, useRoute, type Ref, useRequestFetch, useAsyncData } from '#imports';
+import type { AsyncDataOptions } from 'nuxt/app';
+import type { JsonApiResourceFlat, JsonApiResourceObject } from '@atlasconsulting/nuxt-bedita';
+import type { NitroFetchOptions } from 'nitropack';
 
 export const useBeditaAuth = () => {
   const user: Ref<UserDataStore | null> = useUserState();
@@ -92,12 +94,24 @@ export const useBeditaAuth = () => {
     return data;
   };
 
-  async function fetchUserData<T = JsonApiResourceObject>(include?: string[]) {
-    const data = await requestFetch<ApiResponseBodyResource<T>>('/api/bedita/auth/user', {
-      query: include ? { include: include.join(',') } : {},
-    });
+  async function $fetchUser<T extends JsonApiResourceObject | JsonApiResourceFlat = JsonApiResourceObject>(
+    options: Omit<NitroFetchOptions<'/api/bedita/auth/user'>, 'baseURL' | 'method'> = {},
+  ) {
+    const data = await requestFetch<ApiResponseBodyResource<T>>('/api/bedita/auth/user', options);
 
     return data.formattedData!.data;
+  }
+
+  function useFetchUser<T extends JsonApiResourceObject | JsonApiResourceFlat = JsonApiResourceObject>(
+    fetchOptions: Omit<NitroFetchOptions<'/api/bedita/auth/user'>, 'baseURL' | 'method'> = {},
+    asyncDataOptions: AsyncDataOptions<T> = {},
+  ) {
+    const key = `fetch:user:${JSON.stringify(fetchOptions.query)}`;
+    return useAsyncData<T>(
+      key,
+      (_nuxtApp, { signal }) => $fetchUser<T>({ ...fetchOptions, signal }),
+      asyncDataOptions,
+    );
   }
 
   return {
@@ -109,6 +123,7 @@ export const useBeditaAuth = () => {
     changePassword,
     optOut,
     updateUser,
-    fetchUserData,
+    $fetchUser,
+    useFetchUser,
   };
 };

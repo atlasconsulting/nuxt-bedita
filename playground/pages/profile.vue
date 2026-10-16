@@ -32,14 +32,14 @@
 </template>
 
 <script setup lang="ts">
-const { user, isLogged, updateUser, fetchUserData } = useBeditaAuth();
+const { user, isLogged, updateUser, useFetchUser } = useBeditaAuth();
 const name = ref();
 const surname = ref();
 const error = ref(false);
 const isLoading = ref(false);
 
 // load complete user data
-const { data: userData, pending: isUserDataLoading, error: userDataError } = await useAsyncData('user-complete-data', () => fetchUserData());
+const { data: userData, pending: isUserDataLoading, error: userDataError } = await useFetchUser();
 name.value = userData.value?.attributes?.name;
 surname.value = userData.value?.attributes?.surname;
 
