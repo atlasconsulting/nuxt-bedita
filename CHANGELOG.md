@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.0.0
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.4...v1.0.0)
+
+### 🚀 Enhancements
+
+- Update bedita-sdk and deps ([#51](https://github.com/atlasconsulting/nuxt-bedita/pull/51))
+- Add `flattenResources` configuration ([#56](https://github.com/atlasconsulting/nuxt-bedita/pull/56))
+- Add `fetchUserData` to `useBeditaAuth` composable ([#58](https://github.com/atlasconsulting/nuxt-bedita/pull/58))
+
+### 📖 Documentation
+
+- Add documentation of `flattenResources` ([#57](https://github.com/atlasconsulting/nuxt-bedita/pull/57))
+- Add fetchUserData documentation ([#59](https://github.com/atlasconsulting/nuxt-bedita/pull/59))
+- Fix title code style ([d9b91ed](https://github.com/atlasconsulting/nuxt-bedita/commit/d9b91ed))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+
 ## v1.0.0-alpha.4
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.3...v1.0.0-alpha.4)
