@@ -2,6 +2,7 @@ import {
   BEditaApiClient,
   MapIncludedInterceptor,
   RemoveLinksInterceptor,
+  type ApiClientConfig,
   type ApiResponseBodyError,
   type MapIncludedConfig,
 } from '@atlasconsulting/bedita-sdk';
@@ -15,23 +16,25 @@ import type { BeditaProjectConf } from '../../types';
 import { getSessionConfig } from './session';
 import { useRuntimeConfig } from '#imports';
 
-export const beditaApiClient = async (event: H3Event): Promise<BEditaApiClient> => {
+export const beditaApiClient = async (event: H3Event, clientConfig?: Partial<BeditaProjectConf> & Partial<ApiClientConfig>): Promise<BEditaApiClient> => {
   const runtimeConfig = useRuntimeConfig(event);
   const session = await useSession(event, getSessionConfig(event));
-  const config = getProjectConfig(session.data, runtimeConfig) as BeditaProjectConf;
+  const config = defu(clientConfig, getProjectConfig(session.data, runtimeConfig));
   const client = new BEditaApiClient({
-    baseUrl: config?.apiBaseUrl as string,
-    apiKey: config?.apiKey as string,
+    baseUrl: config.apiBaseUrl,
+    apiKey: config.apiKey,
     storageAdapter: new SessionStorageAdapter(session),
   });
 
-  if (config?.removeLinksMember) {
+  if (config.removeLinksMember) {
     client.addInterceptor(new RemoveLinksInterceptor());
   }
 
-  const options: MapIncludedConfig = {};
+  const options: MapIncludedConfig = {
+    flatten: config.flattenResources || false,
+  };
   const lang = getQuery(event)?.lang;
-  if (config?.replaceTranslations && lang) {
+  if (config.replaceTranslations && lang) {
     options.replaceWithTranslation = lang as string;
   }
 
@@ -40,12 +43,14 @@ export const beditaApiClient = async (event: H3Event): Promise<BEditaApiClient> 
   return client;
 };
 
-export const getProjectConfig = (sessionData: SessionData, config: RuntimeConfig, property?: keyof BeditaProjectConf) => {
+export function getProjectConfig(sessionData: SessionData, config: RuntimeConfig): BeditaProjectConf;
+export function getProjectConfig<K extends keyof BeditaProjectConf>(sessionData: SessionData, config: RuntimeConfig, property: K): BeditaProjectConf[K];
+export function getProjectConfig(sessionData: SessionData, config: RuntimeConfig, property?: keyof BeditaProjectConf) {
   const projectConfig = (config.bedita?.projects?.[sessionData?._project] || {}) as BeditaProjectConf;
-  const beditaConfig = defu(projectConfig, config.bedita);
+  const beditaConfig = defu(projectConfig, config.bedita) as BeditaProjectConf;
 
-  return property ? beditaConfig?.[property] : beditaConfig;
-};
+  return property ? beditaConfig[property] : beditaConfig;
+}
 
 export const handleBeditaApiError = async (event: H3Event, error: AxiosError | H3Error | any): Promise<ApiResponseBodyError> => {
   if (isAxiosError(error) && error?.response) {
