@@ -18,7 +18,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
     name: '@atlasconsulting/nuxt-bedita',
     configKey: 'bedita',
     compatibility: {
-      nuxt: '>=3.18.0',
+      nuxt: '^4.0.0',
     },
   },
 
@@ -257,7 +257,7 @@ export default defineNuxtModule<BeditaModuleOptions>({
       getContents: () => [
         `declare module '@atlasconsulting/nuxt-bedita' {`,
         `  import('${resolver.resolve('./runtime/types')}')`,
-        `  export type { BeditaModuleOptions, UserAuth, UserDataStore, ApiResponseBodyResource, ApiResponseBodyList, SignupBeditaBody } from '${resolver.resolve('./runtime/types')}'`,
+        `  export type { BeditaModuleOptions, UserAuth, UserDataStore, ApiResponseBodyResource, ApiResponseBodyList, SignupBeditaBody, FetchAuthUserOptions } from '${resolver.resolve('./runtime/types')}'`,
         `  export * from '@atlasconsulting/bedita-sdk'`,
         `  export {}`,
         `}`,
