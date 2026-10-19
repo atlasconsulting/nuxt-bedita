@@ -1,3 +1,4 @@
+import type { TypedFetchOptions } from '#app';
 import type { ApiResponseBodyOk, JsonApiResourceObject, JsonApiResourceFlat } from '@atlasconsulting/bedita-sdk';
 
 export type UserAuth = {
@@ -42,6 +43,11 @@ export type SignupBeditaBody = {
   name?: string;
   surname?: string;
 } & Record<string, any>;
+
+export type FetchAuthUserOptions = Omit<
+  TypedFetchOptions<'/api/bedita/auth/user', 'get'>,
+  'baseURL' | 'method'
+>;
 
 export type EndpointConf = 'auth' | 'signup';
 
