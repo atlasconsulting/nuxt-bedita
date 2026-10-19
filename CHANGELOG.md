@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0...v1.1.0)
+
+### 🚀 Enhancements
+
+- Add FetchAuthUserOptions type ([#60](https://github.com/atlasconsulting/nuxt-bedita/pull/60))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+
 ## v1.0.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0-alpha.4...v1.0.0)
