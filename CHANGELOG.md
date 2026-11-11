@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- Make path of api proxy safe ([#61](https://github.com/atlasconsulting/nuxt-bedita/pull/61))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+
 ## v1.1.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.0.0...v1.1.0)
