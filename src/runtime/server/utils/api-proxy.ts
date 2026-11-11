@@ -1,4 +1,4 @@
-import { type H3Event, readBody, readRawBody, getQuery, getHeader, setResponseStatus, createError, assertMethod, type HTTPMethod } from 'h3';
+import { type H3Event, readBody, readRawBody, getQuery, getRequestURL, getHeader, setResponseStatus, createError, assertMethod, type HTTPMethod } from 'h3';
 import type { BEditaClientRequestConfig } from '@atlasconsulting/bedita-sdk';
 import type { ProxyEndpointConf } from '../../types';
 import { beditaApiClient } from './bedita-api-client';
@@ -11,7 +11,7 @@ const isEndpointAllowed = (event: H3Event, path: string, method: HTTPMethod) => 
 
   return allowedEndpoints.length && allowedEndpoints.filter((endpoint) => {
     if (endpoint?.path) {
-      return endpoint.path === '*' || path.startsWith(endpoint.path);
+      return endpoint.path === '*' || path === endpoint.path || path.startsWith(`${endpoint.path}/`);
     }
 
     if (endpoint?.regExp) {
@@ -23,6 +23,21 @@ const isEndpointAllowed = (event: H3Event, path: string, method: HTTPMethod) => 
 };
 
 /**
+ * Get the normalized API path from the request.
+ * `getRequestURL` returns a parsed URL, so `.`, `..` (also if percent-encoded) and backslashes are already resolved;
+ * repeated slashes are collapsed and the proxy prefix removed.
+ * The query string is not part of the path: it is forwarded using `getQuery`.
+ */
+const normalizePath = (event: H3Event): string => {
+  const { pathname } = getRequestURL(event);
+  if (/%(?:2f|5c)/i.test(pathname)) { // reject percent-encoded slashes and backslashes
+    throw createError({ statusCode: 400, statusMessage: 'Bad Request', message: 'Invalid API path' });
+  }
+
+  return pathname.replace(/\/{2,}/g, '/').replace(/^\/api\/bedita(?=\/|$)/, '') || '/';
+};
+
+/**
  * Check if the requested API endpoint is allowed to be proxied and return the API path.
  * If the endpoint is not allowed, an error is thrown.
  */
@@ -30,7 +45,7 @@ export const getBeditaApiPath = (event: H3Event): string => {
   const apiMethods: Partial<HTTPMethod>[] = ['GET', 'POST', 'PATCH', 'DELETE'];
   assertMethod(event, apiMethods);
 
-  const path = event.path.replace(/^\/api\/bedita/, '') || '';
+  const path = normalizePath(event);
   if (isEndpointAllowed(event, path, event.method)) {
     return path;
   }
