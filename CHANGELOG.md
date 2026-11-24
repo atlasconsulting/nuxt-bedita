@@ -1,6 +1,26 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.1.1...v1.2.0)
+
+### 🚀 Enhancements
+
+- Add maxAge and cookie sameSite configuration ([#63](https://github.com/atlasconsulting/nuxt-bedita/pull/63))
+
+### 📖 Documentation
+
+- Documentation for session configuration ([f27cbfd](https://github.com/atlasconsulting/nuxt-bedita/commit/f27cbfd))
+
+### ✅ Tests
+
+- Introducing basic tests for module configuration ([#64](https://github.com/atlasconsulting/nuxt-bedita/pull/64))
+
+### ❤️ Contributors
+
+- Alberto Pagliarini ([@batopa](https://github.com/batopa))
+
 ## v1.1.1
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.1.0...v1.1.1)
