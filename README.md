@@ -66,6 +66,10 @@ export default defineNuxtConfig({
     session: {
       name: 'bedita', // session cookie name
       secret: '<session-secret>', // required private key used to encrypt session
+      maxAge: 3600, // optional session lifetime in seconds
+      cookie: {
+        sameSite: 'lax', // default 'lax'; also accepts 'strict' or 'none'
+      },
     }, 
   }
 })
