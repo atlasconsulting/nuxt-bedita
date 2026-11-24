@@ -24,7 +24,7 @@ const switchProject = async () => {
   }
   error.value = false;
   try {
-    await $fetch('/api/bedita/_project', {
+    await $fetch<unknown>('/api/bedita/_project', {
       method: 'POST',
       body: {
         project: projectName.value,
