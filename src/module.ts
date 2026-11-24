@@ -46,6 +46,10 @@ export default defineNuxtModule<BeditaModuleOptions>({
     session: {
       name: 'bedita',
       secret: '',
+      maxAge: undefined,
+      cookie: {
+        sameSite: 'lax',
+      },
     },
   },
 

@@ -93,5 +93,9 @@ export interface BeditaModuleOptions {
   session: {
     name: string;
     secret: string;
+    maxAge?: number;
+    cookie?: {
+      sameSite?: 'lax' | 'strict' | 'none';
+    };
   };
 };
