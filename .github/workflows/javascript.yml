@@ -36,8 +36,14 @@ jobs:
       - name: Install
         run: npm install
 
+      - name: Prepare
+        run: npm run dev:prepare
+
       - name: Lint
         run: npm run lint
+
+      - name: Test Types
+        run: npm run test:types
 
       - name: Test
         run: npm run test
