@@ -7,5 +7,9 @@ export const getSessionConfig = (event: H3Event): SessionConfig => {
   return {
     password: config.bedita.session.secret,
     name: config.bedita.session.name,
+    maxAge: config.bedita.session.maxAge,
+    cookie: {
+      sameSite: config.bedita.session.cookie.sameSite,
+    },
   } as SessionConfig;
 };
