@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.1
+
+[compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.2.0...v1.2.1)
+
+### 🩹 Fixes
+
+- **auth:** Read session user without the SDK in the auth middleware ([#65](https://github.com/atlasconsulting/nuxt-bedita/pull/65))
+
+### ❤️ Contributors
+
+- Xho ([@xho](https://github.com/xho))
+
 ## v1.2.0
 
 [compare changes](https://github.com/atlasconsulting/nuxt-bedita/compare/v1.1.1...v1.2.0)
