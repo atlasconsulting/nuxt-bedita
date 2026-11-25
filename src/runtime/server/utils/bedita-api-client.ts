@@ -14,6 +14,7 @@ import type { RuntimeConfig } from '@nuxt/schema';
 import SessionStorageAdapter from '../services/adapters/session-storage-adapter';
 import type { BeditaProjectConf } from '../../types';
 import { getSessionConfig } from './session';
+import { SESSION_STORAGE } from './session-storage';
 import { useRuntimeConfig } from '#imports';
 
 export const beditaApiClient = async (event: H3Event, clientConfig?: Partial<BeditaProjectConf> & Partial<ApiClientConfig>): Promise<BEditaApiClient> => {
@@ -23,8 +24,10 @@ export const beditaApiClient = async (event: H3Event, clientConfig?: Partial<Bed
   const client = new BEditaApiClient({
     baseUrl: config.apiBaseUrl,
     apiKey: config.apiKey,
+    name: SESSION_STORAGE.name,
     storageAdapter: new SessionStorageAdapter(session),
   });
+  client.getStorageService().setNamespaceSeparator(SESSION_STORAGE.separator);
 
   if (config.removeLinksMember) {
     client.addInterceptor(new RemoveLinksInterceptor());
