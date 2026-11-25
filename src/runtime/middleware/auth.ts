@@ -1,9 +1,10 @@
-import { beditaApiClient } from '../server/utils/bedita-api-client';
+import { getSessionConfig } from '../server/utils/session';
+import { sessionStorageKey } from '../server/utils/session-storage';
 import type { UserDataStore } from '../types';
 import { useUserState } from '../states/user';
 import { useBeditaAuth } from '../composables/useBeditaAuth';
 import { defineNuxtRouteMiddleware, useRequestEvent, useRuntimeConfig, navigateTo, abortNavigation, createError } from '#imports';
-import type { H3Event } from 'h3';
+import { useSession, type H3Event } from 'h3';
 
 export default defineNuxtRouteMiddleware(async (to) => {
   let config = useRuntimeConfig();
@@ -11,8 +12,8 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (import.meta.server) {
     const event = useRequestEvent() as H3Event;
     config = useRuntimeConfig(event); // ensure to pass event server side
-    const client = await beditaApiClient(event);
-    const userData: UserDataStore | null = await client.getStorageService().get('user');
+    const session = await useSession(event, getSessionConfig(event));
+    const userData: UserDataStore | null = session.data?.[sessionStorageKey('user')] ?? null;
 
     if (userData) {
       const user = useUserState();
