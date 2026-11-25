@@ -12,7 +12,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
   if (import.meta.server) {
     const event = useRequestEvent() as H3Event;
     config = useRuntimeConfig(event); // ensure to pass event server side
-    // Read the session directly: the API client would pull the SDK (axios, CommonJS) into the app bundle
     const session = await useSession(event, getSessionConfig(event));
     const userData: UserDataStore | null = session.data?.[sessionStorageKey('user')] ?? null;
 
